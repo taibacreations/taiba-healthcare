@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import ArrowIcon from "./arrow-icon";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -247,17 +248,28 @@ const Supporting = () => {
             </p>
 
             <div className="group inline-flex items-center justify-center mt-[20px] md:mt-[28px]">
-              <button className="sup-btn btn-roll text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[170px] md:w-[187px] h-[46px]">
+              <Link
+                href="https://taibacreations.com/portfolio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sup-btn btn-roll inline-flex items-center justify-center text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[170px] md:w-[187px] h-[46px]"
+              >
                 <span className="roll">
                   <span data-text="Explore Our Work">Explore Our Work</span>
                 </span>
-              </button>
-              <button className="sup-btn btn-arrow btn-arrow-dark relative flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]">
+              </Link>
+              <Link
+                href="https://taibacreations.com/portfolio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Explore our work"
+                className="sup-btn btn-arrow btn-arrow-dark relative flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]"
+              >
                 <span className="arrow-swap">
                   <ArrowIcon />
                   <ArrowIcon />
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
 

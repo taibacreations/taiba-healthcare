@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import type { Swiper as SwiperType } from "swiper";
+import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
@@ -21,11 +22,24 @@ const PIN_OFFSET = 100;
 const Banner = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
+  const lenis = useLenis();
 
   /* Swiper bante hi (resize par dobara bhi) instance lo aur pin positions dobara naapo */
   const handleSwiper = (swiper: SwiperType) => {
     swiperRef.current = swiper;
     requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
+
+  /* CTA: smooth scroll to contact section */
+  const goToContact = () => {
+    const target = document.getElementById("contact");
+    if (!target) return;
+
+    if (lenis) {
+      lenis.scrollTo(target, { duration: 1.6 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useGSAP(
@@ -313,14 +327,23 @@ const Banner = () => {
             local business profile before booking.
           </p>
           <div className="group inline-flex items-center mt-5 md:mt-3 lg:mt-[15px] xl:mt-[16px] 2xl:mt-[17px] 3xl:mt-[19px]">
-            <button className="anim-btn btn-roll leading-[31px] text-[#438AD8] bg-white rounded-full h-[46px] text-[15px] w-[250px] md:h-[36px] md:text-[11px] md:w-[170px] lg:h-[46px] lg:text-[13px] lg:w-[230px] xl:text-[15px] xl:w-[265px] 2xl:text-[17px] 2xl:w-[300px] 3xl:text-[18px] 3xl:w-[321px]">
+            <button
+              type="button"
+              onClick={goToContact}
+              className="anim-btn btn-roll leading-[31px] text-[#438AD8] bg-white rounded-full h-[46px] text-[15px] w-[250px] md:h-[36px] md:text-[11px] md:w-[170px] lg:h-[46px] lg:text-[13px] lg:w-[230px] xl:text-[15px] xl:w-[265px] 2xl:text-[17px] 2xl:w-[300px] 3xl:text-[18px] 3xl:w-[321px]"
+            >
               <span className="roll">
                 <span data-text="Get a Free Website Consultation">
                   Get a Free Website Consultation
                 </span>
               </span>
             </button>
-            <button className="anim-btn btn-arrow arrow relative flex justify-center items-center rounded-full w-[46px] h-[46px] md:w-[36px] md:h-[36px] lg:w-[46px] lg:h-[46px] shrink-0">
+            <button
+              type="button"
+              onClick={goToContact}
+              aria-label="Go to contact form"
+              className="anim-btn btn-arrow arrow relative flex justify-center items-center rounded-full w-[46px] h-[46px] md:w-[36px] md:h-[36px] lg:w-[46px] lg:h-[46px] shrink-0"
+            >
               <span className="arrow-swap">
                 <ArrowIcon />
                 <ArrowIcon />

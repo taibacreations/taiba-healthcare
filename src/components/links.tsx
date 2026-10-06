@@ -6,7 +6,8 @@ const Links = () => {
     <div>
       <div className="flex flex-row md:flex-col items-center gap-4 lg:gap-5">
         <Link
-          href={"#"}
+          href={"https://www.facebook.com/taibacreations"}
+          target="_blank"
           className="social-link bg-white rounded-full w-[42px] h-[42px] flex justify-center items-center"
         >
           <svg
@@ -25,7 +26,8 @@ const Links = () => {
         </Link>
 
         <Link
-          href={"#"}
+          href={"https://www.instagram.com/taibacreations_/"}
+          target="_blank"
           className="social-link bg-white rounded-full w-[42px] h-[42px] flex justify-center items-center"
         >
           <svg
@@ -43,7 +45,8 @@ const Links = () => {
         </Link>
 
         <Link
-          href={"#"}
+          href={"https://www.linkedin.com/company/taibacreations/"}
+          target="_blank"
           className="social-link bg-white rounded-full w-[42px] h-[42px] flex justify-center items-center"
         >
           <svg

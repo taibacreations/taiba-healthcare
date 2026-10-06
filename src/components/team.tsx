@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import ArrowIcon from "./arrow-icon";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -186,17 +187,28 @@ const Team = () => {
         </div>
 
         <div className="group flex w-fit mx-auto items-center justify-center text-center mt-[28px] md:mt-[32px] 2xl:mt-[38px]">
-          <button className="team-btn btn-roll text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[120px] md:w-[132px] h-[46px]">
+          <Link
+            href="https://taibacreations.com/team/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="team-btn btn-roll inline-flex items-center justify-center text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[120px] md:w-[132px] h-[46px]"
+          >
             <span className="roll">
               <span data-text="See All">See All</span>
             </span>
-          </button>
-          <button className="team-btn btn-arrow btn-arrow-dark relative inline-flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]">
+          </Link>
+          <Link
+            href="https://taibacreations.com/team/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="See all team members"
+            className="team-btn btn-arrow btn-arrow-dark relative inline-flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]"
+          >
             <span className="arrow-swap">
               <ArrowIcon />
               <ArrowIcon />
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

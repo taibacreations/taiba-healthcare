@@ -191,6 +191,7 @@ const Contact = () => {
 
   return (
     <section
+    id="contact"
       ref={sectionRef}
       className="relative bg-[url(/contact.webp)] bg-cover bg-no-repeat bg-bottom overflow-hidden"
     >

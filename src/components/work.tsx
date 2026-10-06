@@ -199,17 +199,28 @@ const Work = () => {
           </div>
 
           <div className="work-btns group flex w-fit mx-auto items-center justify-center text-center mt-[28px] md:mt-[32px] 3xl:mt-[38px]">
-            <button className="work-btn btn-roll text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[120px] md:w-[132px] h-[46px]">
+            <Link
+              href="https://taibacreations.com/case-studies"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="work-btn btn-roll inline-flex items-center justify-center text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[120px] md:w-[132px] h-[46px]"
+            >
               <span className="roll">
                 <span data-text="See All">See All</span>
               </span>
-            </button>
-            <button className="work-btn btn-arrow btn-arrow-dark relative inline-flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]">
+            </Link>
+            <Link
+              href="https://taibacreations.com/case-studies"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="See all case studies"
+              className="work-btn btn-arrow btn-arrow-dark relative inline-flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]"
+            >
               <span className="arrow-swap">
                 <ArrowIcon />
                 <ArrowIcon />
               </span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
