@@ -266,7 +266,7 @@ const Services = () => {
             {services.map((s) => (
               <div
                 key={s.num}
-                className="svc-card w-full rounded-[16px] lg:rounded-[20px] border border-[#B5B5B5] px-6 py-5 md:px-5 md:py-4 lg:px-6 xl:px-8 3xl:px-10 3xl:min-h-[317px]"
+                className="svc-card w-full rounded-[16px] lg:rounded-[20px] border border-[#B5B5B5] px-6 py-5 md:px-5 md:py-4 lg:px-6 xl:px-8 3xl:px-10 3xl:min-h-[300px]"
               >
                 <div className="flex justify-between items-center gap-3">
                   <h4 className="svc-num text-[#E1E1E1] tracking-[1.7%] text-[44px] md:text-[36px] lg:text-[42px] xl:text-[48px] 2xl:text-[54px] 3xl:text-[60px]">
@@ -277,7 +277,7 @@ const Services = () => {
                 <h3 className="svc-heading text-black leading-[123%] text-[24px] md:text-[18px] lg:text-[22px] xl:text-[26px] 2xl:text-[29px] 3xl:text-[32px]">
                   {s.title}
                 </h3>
-                <p className="svc-desc text-black leading-[142%] font-medium mt-[5px] capitalize text-[16px] md:text-[13px] lg:text-[15px] xl:text-[17px] 2xl:text-[18px] 3xl:text-[20px]">
+                <p className="svc-desc text-black leading-[142%] font-medium mt-[5px] text-[16px] md:text-[13px] lg:text-[15px] xl:text-[17px] 2xl:text-[18px]">
                   {s.desc}
                 </p>
               </div>

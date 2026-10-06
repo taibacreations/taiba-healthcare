@@ -13,11 +13,11 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 const testimonials = [
   { poster: "/trusteds1.webp", video: "/video1.mp4" },
-  { poster: "/trusteds1.webp", video: "/video2.mp4" },
-  { poster: "/trusteds1.webp", video: "/video3.mp4" },
+  { poster: "/trusteds2.webp", video: "/video2.mp4" },
+  { poster: "/trusteds3.webp", video: "/video3.mp4" },
   { poster: "/trusteds1.webp", video: "/video1.mp4" },
-  { poster: "/trusteds1.webp", video: "/video2.mp4" },
-  { poster: "/trusteds1.webp", video: "/video3.mp4" },
+  { poster: "/trusteds2.webp", video: "/video2.mp4" },
+  { poster: "/trusteds3.webp", video: "/video3.mp4" },
 ];
 
 /* 1920 design values */
