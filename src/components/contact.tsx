@@ -16,7 +16,13 @@ const contactItems = [
     icon: (
       <svg width="20" height="16" viewBox="0 0 20 16" fill="#497CFC">
         <rect x="1" y="1" width="18" height="14" rx="2" fill="#497CFC" />
-        <path d="M2 3L10 9L18 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M2 3L10 9L18 3"
+          stroke="white"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
   },
@@ -27,7 +33,13 @@ const contactItems = [
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="#497CFC">
         <circle cx="12" cy="12" r="11" fill="#497CFC" />
-        <path d="M7 12.5L10.5 16L17 8.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M7 12.5L10.5 16L17 8.5"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
   },
@@ -80,13 +92,22 @@ const Contact = () => {
         gsap
           .timeline({
             defaults: { ease: "expo.out", clearProps: clear },
-            scrollTrigger: { trigger: q(".ct-card")[0], start: "top 80%", once: true },
+            scrollTrigger: {
+              trigger: q(".ct-card")[0],
+              start: "top 80%",
+              once: true,
+            },
             onComplete: () => {
               titleSplit.revert();
               textSplit.revert();
             },
           })
-          .from(q(".ct-card"), { y: 100, scale: 0.96, autoAlpha: 0, duration: 1.4 })
+          .from(q(".ct-card"), {
+            y: 100,
+            scale: 0.96,
+            autoAlpha: 0,
+            duration: 1.4,
+          })
           .from(
             titleSplit.words,
             {
@@ -98,15 +119,31 @@ const Contact = () => {
             },
             0.4,
           )
-          .from(textSplit.lines, { yPercent: 105, duration: 1.1, stagger: 0.08 }, 0.75)
+          .from(
+            textSplit.lines,
+            { yPercent: 105, duration: 1.1, stagger: 0.08 },
+            0.75,
+          )
           .from(
             q(".ct-item"),
-            { x: -30, autoAlpha: 0, duration: 1, stagger: 0.1, ease: "power3.out" },
+            {
+              x: -30,
+              autoAlpha: 0,
+              duration: 1,
+              stagger: 0.1,
+              ease: "power3.out",
+            },
             0.9,
           )
           .from(
             q(".ct-field"),
-            { y: 30, autoAlpha: 0, duration: 1, stagger: 0.08, ease: "power3.out" },
+            {
+              y: 30,
+              autoAlpha: 0,
+              duration: 1,
+              stagger: 0.08,
+              ease: "power3.out",
+            },
             0.5,
           )
           .from(
@@ -118,7 +155,11 @@ const Contact = () => {
         /* ---------- Watermark + footer (clip reveal, transform nahi chhedte) ---------- */
         gsap
           .timeline({
-            scrollTrigger: { trigger: q(".ct-mark")[0], start: "top 95%", once: true },
+            scrollTrigger: {
+              trigger: q(".ct-mark")[0],
+              start: "top 95%",
+              once: true,
+            },
           })
           .fromTo(
             q(".ct-mark"),
@@ -151,7 +192,7 @@ const Contact = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[url(/contact.png)] bg-cover bg-no-repeat bg-bottom overflow-hidden"
+      className="relative bg-[url(/contact.webp)] bg-cover bg-no-repeat bg-bottom overflow-hidden"
     >
       {/* Only covers the top transition */}
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#FFFFFF] to-transparent" />
@@ -166,7 +207,9 @@ const Contact = () => {
           {/* Left panel */}
           <div
             className="shrink-0 text-white px-6 py-8 md:w-[300px] md:px-7 md:py-8 lg:w-[360px] lg:px-11 lg:py-10 xl:w-[426px] xl:px-16 xl:py-[52px]"
-            style={{ background: "linear-gradient(180deg, #0033FF 0%, #5288FA 100%)" }}
+            style={{
+              background: "linear-gradient(180deg, #0033FF 0%, #5288FA 100%)",
+            }}
           >
             <h2 className="ct-title font-calsans tracking-[-0.03em] text-[34px] leading-[36px] md:text-[30px] md:leading-[32px] lg:text-[38px] lg:leading-[38px] xl:text-[50px] xl:leading-[47px]">
               Your Next Patient Is Searching for{" "}
@@ -176,7 +219,8 @@ const Contact = () => {
             </h2>
 
             <p className="ct-text font-medium mt-3 text-[16px] leading-[23px] md:text-[15px] md:leading-[21px] lg:text-[16px] lg:leading-[23px] xl:text-[18px] xl:leading-[25px]">
-              Make Sure Patients Find Your Clinic Before They Find Your Competitors
+              Make Sure Patients Find Your Clinic Before They Find Your
+              Competitors
             </p>
 
             <div className="flex flex-col mt-7 gap-5 md:gap-4 xl:gap-6">
@@ -188,7 +232,10 @@ const Contact = () => {
                 );
 
                 return (
-                  <div key={item.label} className="ct-item flex items-center gap-3 xl:gap-4">
+                  <div
+                    key={item.label}
+                    className="ct-item flex items-center gap-3 xl:gap-4"
+                  >
                     <span className="ct-icon flex justify-center items-center rounded-full bg-white shrink-0 w-[44px] h-[44px] md:w-[40px] md:h-[40px] xl:w-[48px] xl:h-[48px]">
                       {item.icon}
                     </span>
@@ -212,22 +259,40 @@ const Contact = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 xl:gap-6">
               <label className="ct-field flex flex-col gap-2">
                 <span className={labelClass}>Name</span>
-                <input type="text" name="name" placeholder="Jane Doe" required className={`${inputClass} h-[48px] xl:h-[50px]`} />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Jane Doe"
+                  required
+                  className={`${inputClass} h-[48px] xl:h-[50px]`}
+                />
               </label>
               <label className="ct-field flex flex-col gap-2">
                 <span className={labelClass}>Email</span>
-                <input type="email" name="email" placeholder="jane@clinic.com" required className={`${inputClass} h-[48px] xl:h-[50px]`} />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="jane@clinic.com"
+                  required
+                  className={`${inputClass} h-[48px] xl:h-[50px]`}
+                />
               </label>
             </div>
 
             <label className="ct-field flex flex-col gap-2 mt-5 xl:mt-6">
               <span className={labelClass}>Project Type</span>
-              <input type="text" name="projectType" placeholder="Clinic Website Redesign" className={`${inputClass} h-[48px] xl:h-[50px]`} />
+              <input
+                type="text"
+                name="projectType"
+                placeholder="Clinic Website Redesign"
+                className={`${inputClass} h-[48px] xl:h-[50px]`}
+              />
             </label>
 
             <label className="ct-field flex flex-col gap-2 mt-5 xl:mt-6">
               <span className={labelClass}>Message</span>
               <textarea
+                data-lenis-prevent
                 name="message"
                 placeholder="Tell me about your vision..."
                 rows={4}

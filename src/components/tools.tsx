@@ -12,25 +12,25 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 type Tool = { src: string; alt: string; pos: string; img: string };
 
 const ringOuter: Tool[] = [
-  { src: "/chatgpt.png", alt: "chatgpt", pos: "top-[-4.3%] left-[calc(50%-var(--icon)/2)]", img: "w-[60.5%]" },
-  { src: "/nextjs.png", alt: "nextjs", pos: "top-[0%] left-[23.5%]", img: "w-[55.5%]" },
-  { src: "/react.png", alt: "react", pos: "top-[10.5%] left-[80%]", img: "w-[62.2%]" },
-  { src: "/php.png", alt: "php", pos: "top-[41.5%] left-[94.5%]", img: "w-[58%]" },
-  { src: "/nodejs.png", alt: "nodejs", pos: "top-[21%] left-[.5%]", img: "w-[47%]" },
+  { src: "/chatgpt.webp", alt: "chatgpt", pos: "top-[-4.3%] left-[calc(50%-var(--icon)/2)]", img: "w-[60.5%]" },
+  { src: "/nextjs.webp", alt: "nextjs", pos: "top-[0%] left-[23.5%]", img: "w-[55.5%]" },
+  { src: "/react.webp", alt: "react", pos: "top-[10.5%] left-[80%]", img: "w-[62.2%]" },
+  { src: "/php.webp", alt: "php", pos: "top-[41.5%] left-[94.5%]", img: "w-[58%]" },
+  { src: "/nodejs.webp", alt: "nodejs", pos: "top-[21%] left-[.5%]", img: "w-[47%]" },
 ];
 
 const ringMiddle: Tool[] = [
-  { src: "/wix.png", alt: "wix", pos: "top-[-4.3%] left-[56%]", img: "w-[45.4%]" },
-  { src: "/figma.png", alt: "figma", pos: "top-[4%] left-[15.5%]", img: "w-[48.7%]" },
-  { src: "/wordpress.png", alt: "wordpress", pos: "top-[21%] left-[86.5%]", img: "w-[67.2%]" },
-  { src: "/framer.png", alt: "framer", pos: "top-[37%] left-[-6%]", img: "w-[51.3%]" },
+  { src: "/wix.webp", alt: "wix", pos: "top-[-4.3%] left-[56%]", img: "w-[45.4%]" },
+  { src: "/figma.webp", alt: "figma", pos: "top-[4%] left-[15.5%]", img: "w-[48.7%]" },
+  { src: "/wordpress.webp", alt: "wordpress", pos: "top-[21%] left-[86.5%]", img: "w-[67.2%]" },
+  { src: "/framer.webp", alt: "framer", pos: "top-[37%] left-[-6%]", img: "w-[51.3%]" },
 ];
 
 const ringInner: Tool[] = [
-  { src: "/webflow.png", alt: "webflow", pos: "top-[-7%] left-[29.5%]", img: "w-[64.7%]" },
-  { src: "/ghl.png", alt: "ghl", pos: "top-[17%] left-[-.5%]", img: "w-[73.1%]" },
-  { src: "/shopify.png", alt: "shopify", pos: "top-[3%] left-[72%]", img: "w-[48.7%]" },
-  { src: "/n8n.png", alt: "n8n", pos: "top-[34.5%] left-[91%]", img: "w-[62.2%]" },
+  { src: "/webflow.webp", alt: "webflow", pos: "top-[-7%] left-[29.5%]", img: "w-[64.7%]" },
+  { src: "/ghl.webp", alt: "ghl", pos: "top-[17%] left-[-.5%]", img: "w-[73.1%]" },
+  { src: "/shopify.webp", alt: "shopify", pos: "top-[3%] left-[72%]", img: "w-[48.7%]" },
+  { src: "/n8n.webp", alt: "n8n", pos: "top-[34.5%] left-[91%]", img: "w-[62.2%]" },
 ];
 
 const ToolIcon = ({ tool }: { tool: Tool }) => (

@@ -16,34 +16,34 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 const members = [
   {
     name: "khalid mahmood",
-    src: "/team1.png",
+    src: "/team1.webp",
     member: "gap-3 md:gap-[10px] lg:gap-[14px] xl:gap-[17px] 2xl:gap-5",
     img: "w-[130px] md:w-[100px] lg:w-[134px] xl:w-[166px] 2xl:w-[191px]",
   },
   {
     name: "M. Ashraf",
-    src: "/team2.png",
+    src: "/team2.webp",
     member:
       "gap-3 md:gap-[10px] md:-mt-[8px] lg:gap-[14px] lg:-mt-[11px] xl:gap-[17px] xl:-mt-[14px] 2xl:gap-5 2xl:-mt-4",
     img: "w-[156px] md:w-[120px] lg:w-[161px] xl:w-[200px] 2xl:w-[230px]",
   },
   {
     name: "Shazma Sidiq",
-    src: "/team3.png",
+    src: "/team3.webp",
     member:
       "gap-3 md:gap-[8px] md:mt-[10px] lg:gap-[11px] lg:mt-[14px] xl:gap-[14px] xl:mt-[17px] 2xl:gap-4 2xl:mt-5",
     img: "w-[153px] md:w-[117px] lg:w-[158px] xl:w-[196px] 2xl:w-[225px]",
   },
   {
     name: "Akhtar Ali",
-    src: "/team4.png",
+    src: "/team4.webp",
     member:
       "gap-3 md:gap-[12px] md:-mt-[4px] lg:gap-[17px] lg:-mt-[6px] xl:gap-[21px] xl:-mt-[7px] 2xl:gap-6 2xl:-mt-2",
     img: "w-[144px] md:w-[110px] lg:w-[148px] xl:w-[184px] 2xl:w-[212px]",
   },
   {
     name: "Rimsha Javed",
-    src: "/team5.png",
+    src: "/team5.webp",
     member:
       "gap-3 md:gap-[10px] md:-mt-[15px] lg:gap-[13px] lg:-mt-[20px] xl:gap-[16px] xl:-mt-[24px] 2xl:gap-[19px] 2xl:-mt-7",
     img: "w-[134px] md:w-[102px] lg:w-[138px] xl:w-[171px] 2xl:w-[197px]",

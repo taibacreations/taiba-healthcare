@@ -31,7 +31,7 @@ body {
 
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 h1,
@@ -1007,4 +1007,13 @@ button {
   .send-btn:hover::before {
     transition: none;
   }
+}
+
+
+/* ================= PORTFOLIO SLIDER: active slide hamesha upar ================= */
+.portfolio-swiper .swiper-slide {
+  z-index: 1;
+}
+.portfolio-swiper .swiper-slide-active {
+  z-index: 10;
 }

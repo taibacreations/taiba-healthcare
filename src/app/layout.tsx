@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
-import { Cal_Sans, Geist, Geist_Mono, Outfit, Playfair } from "next/font/google";
+import {
+  Cal_Sans,
+  Geist,
+  Geist_Mono,
+  Outfit,
+  Playfair,
+} from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/smooth-scroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,17 +21,17 @@ const geistMono = Geist_Mono({
 const calSans = Cal_Sans({
   variable: "--font-cal-sans",
   subsets: ["latin"],
-  weight: ["400"]
+  weight: ["400"],
 });
 const playFair = Playfair({
   variable: "--font-play-fair",
   subsets: ["latin"],
-  weight: ["300","400","500","600","700","800","900"]
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300","400","500","600","700","800","900"]
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +45,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${calSans.variable} ${playFair.variable} ${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }

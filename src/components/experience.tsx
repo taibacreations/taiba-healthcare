@@ -172,13 +172,13 @@ const Experience = () => {
         <div className="relative w-full">
           <div className="exp-panel relative bg-gradient-to-b from-[#012FF4] to-[#6196FF] rounded-l-none w-[73.5%] aspect-[794/897] rounded-r-[40px] md:aspect-auto md:w-[318px] md:h-[359px] md:rounded-r-[38px] lg:w-[423px] lg:h-[478px] lg:rounded-r-[50px] xl:w-[529px] xl:h-[598px] xl:rounded-r-[63px] 2xl:w-[635px] 2xl:h-[718px] 2xl:rounded-r-[75px] 3xl:w-[794px] 3xl:h-[897px] 3xl:rounded-r-[94px]">
             <img
-              src="/logos.png"
+              src="/logos.webp"
               alt="logo"
               className="exp-logos h-auto absolute left-1/2 -translate-x-1/2 top-[24%] w-[73.4%] md:w-[233px] lg:w-[311px] xl:w-[389px] 2xl:w-[466px] 3xl:w-[583px]"
             />
           </div>
           <img
-            src="/doctors.png"
+            src="/doctors.webp"
             alt="doctors"
             className="exp-doctors h-auto absolute top-[12%] left-0 w-full md:w-[432px] lg:w-[576px] xl:w-[720px] 2xl:w-[864px] 3xl:w-[1080px]"
           />

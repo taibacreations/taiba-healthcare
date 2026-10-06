@@ -10,11 +10,27 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 /* img: logo ki width circle ke percent mein (1920 par 125px circle) */
 const awards = [
-  { src: "/fiverr.png", img: "w-[55.2%]", title: ["Fiverr", "Millionaire"] },
-  { src: "/cpc.png", img: "w-[66.4%]", title: ["top Rated", "seller-cpc Pak"] },
-  { src: "/verified.png", img: "w-[51.2%]", title: ["Vetted Pro", "on fiverr"] },
-  { src: "/toprated.png", img: "w-[67.2%]", title: ["Fiverr top", "rated agency"] },
-  { src: "/extraordinary.png", img: "w-[48%]", title: ["Extraordinary", "Freelancer"] },
+  { src: "/fiverr.webp", img: "w-[55.2%]", title: ["Fiverr", "Millionaire"] },
+  {
+    src: "/cpc.webp",
+    img: "w-[66.4%]",
+    title: ["top Rated", "seller-cpc Pak"],
+  },
+  {
+    src: "/verified.webp",
+    img: "w-[51.2%]",
+    title: ["Vetted Pro", "on fiverr"],
+  },
+  {
+    src: "/toprated.webp",
+    img: "w-[67.2%]",
+    title: ["Fiverr top", "rated agency"],
+  },
+  {
+    src: "/extraordinary.webp",
+    img: "w-[48%]",
+    title: ["Extraordinary", "Freelancer"],
+  },
 ];
 
 const Awards = () => {
@@ -44,7 +60,11 @@ const Awards = () => {
         gsap
           .timeline({
             defaults: { ease: "expo.out", clearProps: clear },
-            scrollTrigger: { trigger: q(".award-head")[0], start: "top 80%", once: true },
+            scrollTrigger: {
+              trigger: q(".award-head")[0],
+              start: "top 80%",
+              once: true,
+            },
             onComplete: () => {
               titleSplit.revert();
               textSplit.revert();
@@ -57,7 +77,11 @@ const Awards = () => {
             duration: 1.3,
             stagger: 0.05,
           })
-          .from(textSplit.lines, { yPercent: 105, duration: 1.1, stagger: 0.08 }, 0.3);
+          .from(
+            textSplit.lines,
+            { yPercent: 105, duration: 1.1, stagger: 0.08 },
+            0.3,
+          );
 
         /* ---------- Cards ---------- */
         const cards = q(".award-card");

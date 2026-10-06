@@ -140,7 +140,7 @@ const Work = () => {
             <div className={CARD}>
               <h6 className={NUM}>01</h6>
               <div className="work-img overflow-hidden rounded-t-[13px]">
-                <img src="/work1.png" alt="work" className="w-full aspect-[9/5]" />
+                <img src="/work1.webp" alt="work" className="w-full aspect-[9/5]" />
               </div>
               <div className={BODY}>
                 <h5 className={TAG}>Industry. Healthcare</h5>
@@ -161,7 +161,7 @@ const Work = () => {
             <div className={CARD}>
               <h6 className={NUM}>02</h6>
               <div className="work-img overflow-hidden rounded-t-[13px]">
-                <img src="/work2.png" alt="work" className="w-full aspect-[9/5]" />
+                <img src="/work2.webp" alt="work" className="w-full aspect-[9/5]" />
               </div>
               <div className={BODY}>
                 <h5 className={TAG}>Industry. Healthcare</h5>
@@ -181,7 +181,7 @@ const Work = () => {
             <div className={CARD}>
               <h6 className={NUM}>03</h6>
               <div className="work-img overflow-hidden rounded-t-[13px]">
-                <img src="/work3.png" alt="work" className="w-full aspect-[9/5]" />
+                <img src="/work3.webp" alt="work" className="w-full aspect-[9/5]" />
               </div>
               <div className={BODY}>
                 <h5 className={TAG}>Industry. Healthcare</h5>

@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -16,13 +17,10 @@ const portfolioImages = [
   "portfolio3.webp",
   "portfolio1.webp",
   "portfolio2.webp",
-  "portfolio3.webp",
-  "portfolio1.webp",
-  "portfolio2.webp",
-  "portfolio3.webp",
-  "portfolio1.webp",
-  "portfolio2.webp",
 ];
+
+/* Banner ko pata ho ke kitni slides hain (scroll ki lambai isi se nikalti hai) */
+export const PORTFOLIO_COUNT = portfolioImages.length;
 
 /* 1920 design values (3xl) */
 const BASE = {
@@ -42,11 +40,16 @@ const getScale = (w: number) => {
   if (w >= 1536) return 0.8; // 2xl
   if (w >= 1280) return 0.65; // xl
   if (w >= 1024) return 0.65; // lg
-  if (w >= 768) return 0.5; // md (tablet, stacked layout)
+  if (w >= 768) return 0.5; // md
   return 0.38; // mobile
 };
 
-const Portfolio = () => {
+type Props = {
+  /** Swiper bante hi (aur resize par dobara bante hi) Banner ko instance deta hai */
+  onSwiper?: (swiper: SwiperType) => void;
+};
+
+const Portfolio = ({ onSwiper }: Props) => {
   const [scale, setScale] = useState(1);
 
   // paint se pehle sahi size, taake mobile par bara slider flash na ho
@@ -73,12 +76,14 @@ const Portfolio = () => {
       >
         <Swiper
           key={scale} // size badalne par Swiper dobara calculate kare
+          className="portfolio-swiper"
           modules={[Autoplay, Navigation]}
           slidesPerView="auto"
           centeredSlides
           loop
           speed={700}
           spaceBetween={SPACE_BETWEEN}
+          onSwiper={onSwiper}
           navigation={{
             prevEl: ".portfolio-prev",
             nextEl: ".portfolio-next",

@@ -1,18 +1,32 @@
 "use client";
 
 import { useRef } from "react";
+import type { Swiper as SwiperType } from "swiper";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Links from "./links";
-import Portfolio from "./portfolio";
+import Portfolio, { PORTFOLIO_COUNT } from "./portfolio";
 import ArrowIcon from "./arrow-icon";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
+/* Har slide ke liye kitna scroll (px). Kam = tez slides, zyada = aahista */
+const SCROLL_PER_SLIDE = 250;
+
+/* Pin kitna upar lage (px). Zyada = aur upar, kam = neeche */
+const PIN_OFFSET = 100;
+
 const Banner = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  /* Swiper bante hi (resize par dobara bhi) instance lo aur pin positions dobara naapo */
+  const handleSwiper = (swiper: SwiperType) => {
+    swiperRef.current = swiper;
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
 
   useGSAP(
     () => {
@@ -25,6 +39,45 @@ const Banner = () => {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        /* ---------- Scroll se slides: hero ka neecha hissa screen par aate hi pin ---------- */
+        const steps = PORTFOLIO_COUNT - 1;
+        let lastStep = 0;
+
+        ScrollTrigger.create({
+          trigger: section,
+          // hero ka neecha kinara screen ke neeche se PIN_OFFSET upar aate hi pin
+          // (hero screen se chhota ho to shuru se hi)
+          start: () =>
+            section.offsetHeight > window.innerHeight
+              ? `bottom bottom-=${PIN_OFFSET}`
+              : "top top",
+          end: () => `+=${steps * SCROLL_PER_SLIDE}`,
+          pin: section,
+          pinSpacing: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const swiper = swiperRef.current;
+            if (!swiper) return;
+
+            const step = Math.round(self.progress * steps);
+            const diff = step - lastStep;
+            if (!diff) return;
+            lastStep = step;
+
+            // ek qadam aage/peeche, taake arrows/drag se badli hui slide se hi aage chale
+            if (diff === 1) swiper.slideNext();
+            else if (diff === -1) swiper.slidePrev();
+            else {
+              // bohot tez scroll par seedha sahi slide par
+              const target =
+                (((swiper.realIndex + diff) % PORTFOLIO_COUNT) + PORTFOLIO_COUNT) %
+                PORTFOLIO_COUNT;
+              swiper.slideToLoop(target);
+            }
+          },
+        });
+
         const titleSplit = SplitText.create(q(".anim-title"), {
           type: "words",
           mask: "words",
@@ -200,7 +253,7 @@ const Banner = () => {
         <div className="flex items-center h-full">
           <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
             <img
-              src="/icon1.png"
+              src="/icon1.webp"
               alt="icon"
               className="h-auto w-[34px] md:w-[30px] lg:w-[36px] xl:w-[44px] 2xl:w-[50px] 3xl:w-[58px]"
             />
@@ -213,7 +266,7 @@ const Banner = () => {
 
           <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
             <img
-              src="/icon2.png"
+              src="/icon2.webp"
               alt="icon"
               className="h-auto w-[64px] md:w-[56px] lg:w-[68px] xl:w-[82px] 2xl:w-[94px] 3xl:w-[109px]"
             />
@@ -226,7 +279,7 @@ const Banner = () => {
 
           <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
             <img
-              src="/icon3.png"
+              src="/icon3.webp"
               alt="icon"
               className="h-auto w-[34px] md:w-[30px] lg:w-[36px] xl:w-[44px] 2xl:w-[50px] 3xl:w-[58px]"
             />
@@ -279,7 +332,7 @@ const Banner = () => {
 
       {/* Portfolio */}
       <div className="anim-portfolio order-4 relative w-full mt-8 md:mt-0 md:absolute md:left-0 md:top-[320px] lg:top-[36%]">
-        <Portfolio />
+        <Portfolio onSwiper={handleSwiper} />
       </div>
     </section>
   );

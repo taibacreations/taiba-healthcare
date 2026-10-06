@@ -12,12 +12,12 @@ import "swiper/css";
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 const testimonials = [
-  { poster: "/trusteds1.png", video: "/video1.mp4" },
-  { poster: "/trusteds1.png", video: "/video2.mp4" },
-  { poster: "/trusteds1.png", video: "/video3.mp4" },
-  { poster: "/trusteds1.png", video: "/video1.mp4" },
-  { poster: "/trusteds1.png", video: "/video2.mp4" },
-  { poster: "/trusteds1.png", video: "/video3.mp4" },
+  { poster: "/trusteds1.webp", video: "/video1.mp4" },
+  { poster: "/trusteds1.webp", video: "/video2.mp4" },
+  { poster: "/trusteds1.webp", video: "/video3.mp4" },
+  { poster: "/trusteds1.webp", video: "/video1.mp4" },
+  { poster: "/trusteds1.webp", video: "/video2.mp4" },
+  { poster: "/trusteds1.webp", video: "/video3.mp4" },
 ];
 
 /* 1920 design values */
@@ -98,7 +98,9 @@ const Trusted = () => {
 
   /* Arrows: md+ par side slide ke kinare par (aadha bahar), mobile par screen ke andar */
   const ARROW_OFFSET = isMobile ? MOBILE_ARROW_GAP : ACTIVE_WIDTH - SIDE_WIDTH;
-  const PREV_TRANSFORM = isMobile ? "translateY(-50%)" : "translate(-50%, -50%)";
+  const PREV_TRANSFORM = isMobile
+    ? "translateY(-50%)"
+    : "translate(-50%, -50%)";
   const NEXT_TRANSFORM = isMobile ? "translateY(-50%)" : "translate(50%, -50%)";
 
   /** Active: all corners. Left slide: outer (left) corners. Right slide: outer (right) corners. */
@@ -290,7 +292,11 @@ const Trusted = () => {
             type="button"
             onClick={() => swiperRef.current?.slidePrev()}
             className="trusted-arrow trusted-arrow-prev rounded-full flex justify-center items-center cursor-pointer"
-            style={{ width: ARROW_SIZE, height: ARROW_SIZE, background: "#0A3CFF" }}
+            style={{
+              width: ARROW_SIZE,
+              height: ARROW_SIZE,
+              background: "#0A3CFF",
+            }}
             aria-label="Previous"
           >
             <span className="rotate-180 flex">
@@ -313,7 +319,11 @@ const Trusted = () => {
             type="button"
             onClick={() => swiperRef.current?.slideNext()}
             className="trusted-arrow rounded-full flex justify-center items-center cursor-pointer"
-            style={{ width: ARROW_SIZE, height: ARROW_SIZE, background: "#0A3CFF" }}
+            style={{
+              width: ARROW_SIZE,
+              height: ARROW_SIZE,
+              background: "#0A3CFF",
+            }}
             aria-label="Next"
           >
             <ArrowIcon />
