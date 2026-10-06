@@ -143,7 +143,7 @@ const Work = () => {
                 <img src="/work1.webp" alt="work" className="w-full aspect-[9/5]" />
               </div>
               <div className={BODY}>
-                <h5 className={TAG}>Industry. Healthcare</h5>
+                
                 <h3 className={`${TITLE} 2xl:leading-[20px]`}>
                   Alpha Morris Website Design
                 </h3>
@@ -164,7 +164,7 @@ const Work = () => {
                 <img src="/work2.webp" alt="work" className="w-full aspect-[9/5]" />
               </div>
               <div className={BODY}>
-                <h5 className={TAG}>Industry. Healthcare</h5>
+                
                 <h3 className={`${TITLE} 2xl:leading-[20px]`}>
                   Magnolia Smiles Website
                 </h3>
@@ -184,7 +184,7 @@ const Work = () => {
                 <img src="/work3.webp" alt="work" className="w-full aspect-[9/5]" />
               </div>
               <div className={BODY}>
-                <h5 className={TAG}>Industry. Healthcare</h5>
+                
                 <h3 className={`${TITLE} 2xl:leading-[29px]`}>
                   Addiction Recovery <br /> Website Redesign
                 </h3>
