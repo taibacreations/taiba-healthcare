@@ -1017,3 +1017,24 @@ button {
 .portfolio-swiper .swiper-slide-active {
   z-index: 10;
 }
+
+/* ================= IMPACT STATS ================= */
+.imp-num {
+  display: inline-block;
+  transition:
+    color 0.4s ease,
+    translate 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (hover: hover) {
+  .imp-stat:hover .imp-num {
+    color: #0635f4;
+    translate: 0 -4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imp-num {
+    transition: none;
+  }
+}

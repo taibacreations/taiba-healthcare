@@ -10,6 +10,7 @@ import Team from "@/components/team";
 import Tools from "@/components/tools";
 import Trusted from "@/components/trusted";
 import Work from "@/components/work";
+import Impact from "@/components/impact";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Supporting />
       <Services />
       <Experience />
+      <Impact />
       <Work />
       <Process />
       <Tools />
