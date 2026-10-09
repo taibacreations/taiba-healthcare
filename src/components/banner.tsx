@@ -18,6 +18,8 @@ const SCROLL_PER_SLIDE = 250;
 
 /* Pin kitna upar lage (px). Zyada = aur upar, kam = neeche */
 const PIN_OFFSET = 100;
+/* Pin par portfolio ka top screen ke top se kam az kam itna neeche rahe (px) */
+const PORTFOLIO_TOP_GAP = 20;
 
 const Banner = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -59,17 +61,28 @@ const Banner = () => {
 
         ScrollTrigger.create({
           trigger: section,
-          // hero ka neecha kinara screen ke neeche se PIN_OFFSET upar aate hi pin
-          // (hero screen se chhota ho to shuru se hi)
-          start: () =>
-            section.offsetHeight > window.innerHeight
-              ? `bottom bottom-=${PIN_OFFSET}`
-              : "top top",
+          // Pin un dono mein se jo pehle aaye:
+          // 1) hero ka neecha kinara screen ke neeche se PIN_OFFSET upar
+          // 2) portfolio ka top screen ke top se PORTFOLIO_TOP_GAP neeche (taake upar se na kate)
+          start: () => {
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+            const portfolio = q(".anim-portfolio")[0] as HTMLElement | undefined;
+
+            const bottomAlign =
+              sectionTop + section.offsetHeight - window.innerHeight + PIN_OFFSET;
+            const portfolioAlign = portfolio
+              ? sectionTop + portfolio.offsetTop - PORTFOLIO_TOP_GAP
+              : bottomAlign;
+
+            // hero screen se chhota ho to shuru se hi (section ka top)
+            return Math.max(sectionTop, Math.min(bottomAlign, portfolioAlign));
+          },
           end: () => `+=${steps * SCROLL_PER_SLIDE}`,
           pin: section,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          refreshPriority: 1, // pin sab se pehle naapo, taake neeche ke sections sahi jagah trigger hon
           onUpdate: (self) => {
             const swiper = swiperRef.current;
             if (!swiper) return;
