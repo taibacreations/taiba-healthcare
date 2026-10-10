@@ -5,41 +5,17 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
-
-const faqs = [
-  {
-    q: "What type of healthcare websites do you build?",
-    a: "We build websites for clinics, dentists, hospitals, therapists, psychiatrists, home care providers, and other healthcare businesses. Each website is designed around the services you offer and the way your patients search for your clinic online.",
-  },
-  {
-    q: "Can you add online appointment booking?",
-    a: "Yes. We can connect your website with your existing booking system or set up a new one, so patients can choose a service, pick a time, and book directly from any page of your website.",
-  },
-  {
-    q: "Will my healthcare website work well on mobile?",
-    a: "Yes. Every website we build is fully responsive and tested on phones, tablets, and desktops, so patients get a fast and easy experience on any device.",
-  },
-  {
-    q: "Can you help my clinic appear on Google?",
-    a: "Yes. Every website is built SEO-ready with proper structure, page speed, and local search setup, so your clinic has a better chance to appear when patients search for services in your area.",
-  },
-  {
-    q: "Can you redesign my existing healthcare website?",
-    a: "Yes. We can redesign your current website with a modern look while keeping your content, rankings, and important pages safe during the move.",
-  },
-  {
-    q: "Can you build a HIPAA-aware healthcare website?",
-    a: "Yes. We follow HIPAA-aware practices such as secure forms, SSL, limited data collection, and trusted third-party tools, so patient information is handled with care.",
-  },
-];
 
 const EASE = "cubic-bezier(0.19, 1, 0.22, 1)";
 
 const Faq = () => {
   const [open, setOpen] = useState<number | null>(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const { content } = useIndustry();
+  const faq = content.faq;
 
   useGSAP(
     () => {
@@ -101,18 +77,18 @@ const Faq = () => {
       <div className="max-w-[1470px] mx-auto xl:px-10 md:px-6 px-4">
         <div>
           <h2 className="faq-title leading-[100%] tracking-[-3%] text-black mt-[5px] text-[30px] md:text-[36px] lg:text-[40px] xl:text-[46px] 2xl:text-[50px]">
-            Frequently Asked{" "}
+            {faq.titleStart}{" "}
             <span className="font-playfair tracking-[-9%] italic font-light">
-              Questions
+              {faq.titleItalic}
             </span>
           </h2>
           <p className="faq-text font-medium text-black mt-[5px] text-[15px] leading-[24px] md:text-[16px] md:leading-[28px] xl:text-[18px] xl:leading-[34px]">
-            Everything research teams usually ask before placing an order with us.
+            {faq.text}
           </p>
         </div>
 
         <div className="flex flex-col gap-3 md:gap-4 xl:gap-5 mt-6">
-          {faqs.map((item, i) => {
+          {faq.items.map((item, i) => {
             const isOpen = open === i;
 
             return (
@@ -120,8 +96,8 @@ const Faq = () => {
                 key={i}
                 className={`faq-item rounded-[14px] md:rounded-[20px] border ${isOpen ? "is-open" : ""}`}
                 style={{
-                  background: isOpen ? "#0033FF" : "#FFFFFF",
-                  borderColor: isOpen ? "#0033FF" : "#ACACAC",
+                  background: isOpen ? "var(--brand)" : "#FFFFFF",
+                  borderColor: isOpen ? "var(--brand)" : "#ACACAC",
                   transition: `background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.6s ${EASE}`,
                 }}
               >
@@ -152,7 +128,7 @@ const Faq = () => {
                     style={{
                       width: "var(--ficon)",
                       height: "var(--ficon)",
-                      background: isOpen ? "#FFFFFF" : "#0033FF",
+                      background: isOpen ? "#FFFFFF" : "var(--brand)",
                       rotate: isOpen ? "180deg" : "0deg",
                       transition: `background-color 0.5s ease, rotate 0.6s ${EASE}`,
                     }}
@@ -160,10 +136,12 @@ const Faq = () => {
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                       <path
                         d="M1 6H11"
-                        stroke={isOpen ? "#0033FF" : "#FFFFFF"}
                         strokeWidth="2"
                         strokeLinecap="round"
-                        style={{ transition: "stroke 0.5s ease" }}
+                        style={{
+                          stroke: isOpen ? "var(--brand)" : "#FFFFFF",
+                          transition: "stroke 0.5s ease",
+                        }}
                       />
                       <path
                         d="M6 1V11"

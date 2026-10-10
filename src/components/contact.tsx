@@ -1,67 +1,77 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
-const contactItems = [
-  {
-    label: "Email",
-    value: "info@taibacreations.com",
-    href: "mailto:info@taibacreations.com",
-    icon: (
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="#497CFC">
-        <rect x="1" y="1" width="18" height="14" rx="2" fill="#497CFC" />
-        <path
-          d="M2 3L10 9L18 3"
-          stroke="white"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Availability",
-    value: "Available 24/7",
-    href: null,
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="#497CFC">
-        <circle cx="12" cy="12" r="11" fill="#497CFC" />
-        <path
-          d="M7 12.5L10.5 16L17 8.5"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Phone Number",
-    value: "+17747240949",
-    href: "tel:+17747240949",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#497CFC">
-        <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z" />
-      </svg>
-    ),
-  },
-];
+/* Icons ka rang theme ke --contact-icon se (currentColor) */
+const ICONS: Record<"email" | "availability" | "phone", ReactNode> = {
+  email: (
+    <svg width="20" height="16" viewBox="0 0 20 16" fill="currentColor">
+      <rect x="1" y="1" width="18" height="14" rx="2" fill="currentColor" />
+      <path
+        d="M2 3L10 9L18 3"
+        stroke="white"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  availability: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="11" fill="currentColor" />
+      <path
+        d="M7 12.5L10.5 16L17 8.5"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  phone: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z" />
+    </svg>
+  ),
+};
 
 const inputClass =
-  "ct-input w-full rounded-[10px] border border-[#D9D9D9] bg-[#FAFAFA] px-4 font-outfit text-black placeholder:text-[#2D2D2D66] outline-none focus:border-[#0033FF] transition-colors text-[16px] xl:text-[18px]";
+  "ct-input w-full rounded-[10px] border border-[#D9D9D9] bg-[#FAFAFA] px-4 font-outfit text-black placeholder:text-[#2D2D2D66] outline-none focus:border-brand transition-colors text-[16px] xl:text-[18px]";
 
 const labelClass = "font-calsans text-[#2D2D2D] text-[16px] xl:text-[18px]";
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { content, asset } = useIndustry();
+  const contact = content.contact;
+
+  const contactItems = [
+    {
+      label: "Email",
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+      icon: ICONS.email,
+    },
+    {
+      label: "Availability",
+      value: contact.availability,
+      href: null,
+      icon: ICONS.availability,
+    },
+    {
+      label: "Phone Number",
+      value: contact.phone,
+      href: `tel:${contact.phone.replace(/\s/g, "")}`,
+      icon: ICONS.phone,
+    },
+  ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -191,15 +201,16 @@ const Contact = () => {
 
   return (
     <section
-    id="contact"
+      id="contact"
       ref={sectionRef}
-      className="relative bg-[url(/contact.webp)] bg-cover bg-no-repeat bg-bottom overflow-hidden"
+      className="relative bg-cover bg-no-repeat bg-bottom overflow-hidden"
+      style={{ backgroundImage: `url(${asset("contact.webp")})` }}
     >
       {/* Only covers the top transition */}
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#FFFFFF] to-transparent" />
       <img
-        src="/taiba.png"
-        alt="logo"
+        src={asset("taiba.png")}
+        alt=""
         className="ct-mark absolute left-1/2 -translate-x-1/2 bottom-0 w-[88%] max-w-none h-auto 3xl:w-auto"
       />
 
@@ -208,20 +219,17 @@ const Contact = () => {
           {/* Left panel */}
           <div
             className="shrink-0 text-white px-6 py-8 md:w-[300px] md:px-7 md:py-8 lg:w-[360px] lg:px-11 lg:py-10 xl:w-[426px] xl:px-16 xl:py-[52px]"
-            style={{
-              background: "linear-gradient(180deg, #0033FF 0%, #5288FA 100%)",
-            }}
+            style={{ background: "var(--grad-contact)" }}
           >
             <h2 className="ct-title font-calsans tracking-[-0.03em] text-[34px] leading-[36px] md:text-[30px] md:leading-[32px] lg:text-[38px] lg:leading-[38px] xl:text-[50px] xl:leading-[47px]">
-              Your Next Patient Is Searching for{" "}
+              {contact.titleStart}{" "}
               <span className="font-playfair italic font-light tracking-[-0.09em]">
-                You Right Now.
+                {contact.titleItalic}
               </span>
             </h2>
 
             <p className="ct-text font-medium mt-3 text-[16px] leading-[23px] md:text-[15px] md:leading-[21px] lg:text-[16px] lg:leading-[23px] xl:text-[18px] xl:leading-[25px]">
-              Make Sure Patients Find Your Clinic Before They Find Your
-              Competitors
+              {contact.text}
             </p>
 
             <div className="flex flex-col mt-7 gap-5 md:gap-4 xl:gap-6">
@@ -237,7 +245,10 @@ const Contact = () => {
                     key={item.label}
                     className="ct-item flex items-center gap-3 xl:gap-4"
                   >
-                    <span className="ct-icon flex justify-center items-center rounded-full bg-white shrink-0 w-[44px] h-[44px] md:w-[40px] md:h-[40px] xl:w-[48px] xl:h-[48px]">
+                    <span
+                      className="ct-icon flex justify-center items-center rounded-full bg-white shrink-0 w-[44px] h-[44px] md:w-[40px] md:h-[40px] xl:w-[48px] xl:h-[48px]"
+                      style={{ color: "var(--contact-icon)" }}
+                    >
                       {item.icon}
                     </span>
                     <div className="flex flex-col gap-2 min-w-0">
@@ -273,7 +284,7 @@ const Contact = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="jane@clinic.com"
+                  placeholder={contact.emailPlaceholder}
                   required
                   className={`${inputClass} h-[48px] xl:h-[50px]`}
                 />
@@ -285,7 +296,7 @@ const Contact = () => {
               <input
                 type="text"
                 name="projectType"
-                placeholder="Clinic Website Redesign"
+                placeholder={contact.projectPlaceholder}
                 className={`${inputClass} h-[48px] xl:h-[50px]`}
               />
             </label>
@@ -306,7 +317,7 @@ const Contact = () => {
               className="ct-btn send-btn w-full flex justify-center items-center gap-2 mt-6 xl:mt-7 text-white font-calsans cursor-pointer h-[52px] xl:h-[56px] text-[16px] xl:text-[18px]"
               style={{
                 borderRadius: 12,
-                background: "linear-gradient(180deg, #0033FF 0%, #3D6EFF 100%)",
+                background: "var(--grad-send)",
               }}
             >
               Send Message
@@ -322,8 +333,11 @@ const Contact = () => {
       </div>
 
       {/* Footer bar */}
-      <div className="ct-footer absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex justify-center items-center text-white font-calsans text-center px-6 bg-[#0033FF] w-full max-w-[1056px] h-[52px] rounded-t-[40px] text-[13px] md:h-[60px] md:rounded-t-[70px] md:text-[16px] xl:h-[68px] xl:rounded-t-[90px] xl:text-[18px]">
-        TAIBA Creations @ 2026. All Rights Reserved.
+      <div
+        className="ct-footer absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex justify-center items-center text-white font-calsans text-center px-6 w-full max-w-[1056px] h-[52px] rounded-t-[40px] text-[13px] md:h-[60px] md:rounded-t-[70px] md:text-[16px] xl:h-[68px] xl:rounded-t-[90px] xl:text-[18px]"
+        style={{ background: "var(--brand)" }}
+      >
+        {contact.footer}
       </div>
     </section>
   );

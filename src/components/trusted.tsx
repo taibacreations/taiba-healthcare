@@ -8,17 +8,9 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import "swiper/css";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
-
-const testimonials = [
-  { poster: "/trusteds1.webp", video: "/video1.mp4" },
-  { poster: "/trusteds2.webp", video: "/video2.mp4" },
-  { poster: "/trusteds3.webp", video: "/video3.mp4" },
-  { poster: "/trusteds1.webp", video: "/video1.mp4" },
-  { poster: "/trusteds2.webp", video: "/video2.mp4" },
-  { poster: "/trusteds3.webp", video: "/video3.mp4" },
-];
 
 /* 1920 design values */
 const BASE = {
@@ -72,6 +64,8 @@ const Trusted = () => {
   const [isMobile, setIsMobile] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const { content, asset } = useIndustry();
+  const trusted = content.trusted;
 
   // paint se pehle sahi size, taake mobile par bara slider flash na ho
   useLayoutEffect(() => {
@@ -98,9 +92,7 @@ const Trusted = () => {
 
   /* Arrows: md+ par side slide ke kinare par (aadha bahar), mobile par screen ke andar */
   const ARROW_OFFSET = isMobile ? MOBILE_ARROW_GAP : ACTIVE_WIDTH - SIDE_WIDTH;
-  const PREV_TRANSFORM = isMobile
-    ? "translateY(-50%)"
-    : "translate(-50%, -50%)";
+  const PREV_TRANSFORM = isMobile ? "translateY(-50%)" : "translate(-50%, -50%)";
   const NEXT_TRANSFORM = isMobile ? "translateY(-50%)" : "translate(50%, -50%)";
 
   /** Active: all corners. Left slide: outer (left) corners. Right slide: outer (right) corners. */
@@ -177,9 +169,9 @@ const Trusted = () => {
     >
       <div className="text-center relative z-30 px-5 md:px-0">
         <h2 className="trusted-title tracking-[-3%] text-black mt-[5px] text-[32px] leading-[36px] md:text-[38px] md:leading-[42px] lg:text-[42px] lg:leading-[46px] xl:text-[48px] xl:leading-[52px] 2xl:text-[54px] 2xl:leading-[58px] 3xl:text-[60px] 3xl:leading-[64px]">
-          Trusted by Growing{" "}
+          {trusted.titleStart}{" "}
           <span className="font-playfair tracking-[-9%] italic font-light">
-            Healthcare Practices
+            {trusted.titleItalic}
           </span>
         </h2>
       </div>
@@ -198,7 +190,7 @@ const Trusted = () => {
           onSwiper={(s) => (swiperRef.current = s)}
           onSlideChange={() => setPlaying(null)}
         >
-          {testimonials.map((item, i) => (
+          {trusted.items.map((item, i) => (
             <SwiperSlide
               key={i}
               style={{ width: ACTIVE_WIDTH, height: ACTIVE_HEIGHT }}
@@ -230,8 +222,8 @@ const Trusted = () => {
                   >
                     {isPlaying ? (
                       <video
-                        src={item.video}
-                        poster={item.poster}
+                        src={asset(item.video)}
+                        poster={asset(item.poster)}
                         className="block w-full h-full object-cover"
                         autoPlay
                         controls
@@ -240,8 +232,8 @@ const Trusted = () => {
                     ) : (
                       <>
                         <img
-                          src={item.poster}
-                          alt="testimonial"
+                          src={asset(item.poster)}
+                          alt="Client testimonial"
                           draggable={false}
                           className="block w-full h-full object-cover cursor-grab select-none"
                         />
@@ -259,12 +251,7 @@ const Trusted = () => {
                             }}
                             aria-label="Play video"
                           >
-                            <svg
-                              width="14"
-                              height="16"
-                              viewBox="0 0 14 16"
-                              fill="none"
-                            >
+                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
                               <path d="M13 8L1 15V1L13 8Z" fill="white" />
                             </svg>
                           </button>
@@ -295,7 +282,7 @@ const Trusted = () => {
             style={{
               width: ARROW_SIZE,
               height: ARROW_SIZE,
-              background: "#0A3CFF",
+              background: "var(--brand)",
             }}
             aria-label="Previous"
           >
@@ -322,7 +309,7 @@ const Trusted = () => {
             style={{
               width: ARROW_SIZE,
               height: ARROW_SIZE,
-              background: "#0A3CFF",
+              background: "var(--brand)",
             }}
             aria-label="Next"
           >

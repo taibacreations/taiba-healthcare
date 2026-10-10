@@ -6,7 +6,9 @@ import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { useIndustry } from "@/lib/industry";
 
+/* File names: har industry folder mein yahi names (public/[industry]/...) */
 const portfolioImages = [
   "portfolio3.webp",
   "portfolio1.webp",
@@ -51,6 +53,7 @@ type Props = {
 
 const Portfolio = ({ onSwiper }: Props) => {
   const [scale, setScale] = useState(1);
+  const { asset } = useIndustry();
 
   // paint se pehle sahi size, taake mobile par bara slider flash na ho
   useLayoutEffect(() => {
@@ -89,7 +92,7 @@ const Portfolio = ({ onSwiper }: Props) => {
             nextEl: ".portfolio-next",
           }}
         >
-          {portfolioImages.map((src, i) => (
+          {portfolioImages.map((file, i) => (
             <SwiperSlide
               key={i}
               style={{ width: ACTIVE_WIDTH, height: SLIDE_HEIGHT }}
@@ -99,7 +102,7 @@ const Portfolio = ({ onSwiper }: Props) => {
                 const visible = isActive || isPrev || isNext;
                 return (
                   <img
-                    src={src}
+                    src={asset(file)}
                     alt="portfolio"
                     className="absolute object-contain cursor-grab"
                     style={{

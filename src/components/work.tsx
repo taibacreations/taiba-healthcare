@@ -7,27 +7,31 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import ArrowIcon from "./arrow-icon";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 /* Card ke andar ki shared classes (2xl+ par original 1920 values) */
 const CARD =
-  "work-card relative bg-white border border-[#F0F0F0] work-shadow rounded-[13px] w-full 2xl:h-[451px]";
+  "work-card relative flex flex-col bg-white border border-[#F0F0F0] work-shadow rounded-[13px] w-full 2xl:h-[451px]";
 const NUM =
   "work-num tracking-[-3%] text-[#FAFAFA] absolute bottom-[-10%] right-3 xl:right-5 text-[120px] md:text-[90px] lg:text-[120px] xl:text-[160px] 2xl:text-[200px]";
+/* Body baqi jagah bharti hai, taake "Learn More" hamesha neeche rahe */
 const BODY =
-  "relative px-5 py-5 md:px-3 md:py-3 lg:px-4 lg:py-4 xl:px-5 xl:py-5 2xl:px-6 2xl:py-[24px]";
-const TAG =
-  "bg-[#0635F4] text-white rounded-full max-w-fit text-[12px] px-4 py-1 md:text-[10px] md:px-3 lg:text-[11px] lg:px-4 xl:text-[12px] xl:px-5 2xl:text-[13px] 2xl:px-6 2xl:py-1.5";
+  "relative flex-1 flex flex-col px-5 py-5 md:px-3 md:py-3 lg:px-4 lg:py-4 xl:px-5 xl:py-5 2xl:px-6 2xl:py-[24px]";
 const TITLE =
-  "text-black mt-[14px] text-[22px] leading-[26px] md:mt-[8px] md:text-[17px] md:leading-[20px] lg:mt-[12px] lg:text-[21px] lg:leading-[24px] xl:mt-[15px] xl:text-[24px] xl:leading-[26px] 2xl:mt-[19px] 2xl:text-[28px]";
+  "text-black whitespace-pre-line mt-[14px] text-[22px] leading-[26px] md:mt-[8px] md:text-[17px] md:leading-[20px] lg:mt-[12px] lg:text-[21px] lg:leading-[24px] xl:mt-[15px] xl:text-[24px] xl:leading-[26px] 2xl:mt-[19px] 2xl:text-[28px] 2xl:leading-[30px]";
+/* Paragraph: sab cards mein ek jaisa faasla */
 const TEXT =
-  "font-medium text-black text-[15px] leading-[20px] md:text-[12px] md:leading-[15px] lg:text-[14px] lg:leading-[17px] xl:text-[15px] xl:leading-[18px] 2xl:text-[16px] 2xl:leading-[18px]";
+  "font-medium text-black text-[15px] leading-[20px] mt-[10px] mb-[14px] md:text-[12px] md:leading-[15px] md:mt-[8px] md:mb-[10px] lg:text-[14px] lg:leading-[17px] lg:mt-[12px] lg:mb-[12px] xl:text-[15px] xl:leading-[18px] xl:mt-[14px] xl:mb-[14px] 2xl:text-[16px] 2xl:leading-[20px] 2xl:mt-[16px] 2xl:mb-[16px]";
+/* Link: neeche chipka (mt-auto), underline sirf lafz jitni (self-start) */
 const LINK =
-  "work-link tracking-[1%] text-black text-[15px] leading-[20px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]";
+  "work-link self-start mt-auto tracking-[1%] text-black text-[15px] leading-[20px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]";
 
 const Work = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { content, asset } = useIndustry();
+  const work = content.work;
 
   useGSAP(
     () => {
@@ -124,96 +128,54 @@ const Work = () => {
         <div className="max-w-[1480px] mx-auto xl:px-10 md:px-6 px-4">
           <div className="work-head text-center max-w-[675px] mx-auto">
             <h2 className="work-title tracking-[-3%] text-black mt-[5px] text-[32px] leading-[36px] md:text-[38px] md:leading-[42px] lg:text-[42px] lg:leading-[46px] xl:text-[48px] xl:leading-[52px] 2xl:text-[54px] 2xl:leading-[58px] 3xl:text-[60px] 3xl:leading-[64px]">
-              Our Work,{" "}
+              {work.titleStart}{" "}
               <span className="font-playfair tracking-[-9%] italic font-light">
-                Your Inspiration
+                {work.titleItalic}
               </span>
             </h2>
             <p className="work-text font-medium text-black mt-[9px] text-[15px] leading-[22px] md:text-[16px] md:leading-[23px] xl:text-[18px] xl:leading-[25px]">
-              Explore how we turn ideas into thoughtful, impactful digital
-              experiences designed to solve real challenges.
+              {work.text}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 lg:gap-5 xl:gap-6 2xl:gap-[25px] mt-[24px] 3xl:mt-[28px]">
-            {/* Card 1 */}
-            <div className={CARD}>
-              <h6 className={NUM}>01</h6>
-              <div className="work-img overflow-hidden rounded-t-[13px]">
-                <img src="/work1.webp" alt="work" className="w-full aspect-[9/5]" />
+            {work.items.map((item, i) => (
+              <div key={item.title} className={CARD}>
+                <h6 className={NUM}>{String(i + 1).padStart(2, "0")}</h6>
+                <div className="work-img overflow-hidden rounded-t-[13px]">
+                  <img
+                    src={asset(item.image)}
+                    alt={item.title.replace("\n", " ")}
+                    className="w-full aspect-[9/5]"
+                  />
+                </div>
+                <div className={BODY}>
+                  <h3 className={TITLE}>{item.title}</h3>
+                  <p className={TEXT}>{item.desc}</p>
+                  <Link href={item.link} className={LINK}>
+                    Learn More
+                  </Link>
+                </div>
               </div>
-              <div className={BODY}>
-                
-                <h3 className={`${TITLE} 2xl:leading-[20px]`}>
-                  Alpha Morris Website Design
-                </h3>
-                <p className={`${TEXT} mt-[10px] mb-[8px] md:mt-[8px] md:mb-[6px] lg:mt-[12px] xl:mt-[15px] 2xl:mt-[19px] 2xl:mb-[9px]`}>
-                  Custom healthcare website designed to build trust, explain
-                  services clearly, and drive patient inquiries.
-                </p>
-                <Link href={"#"} className={LINK}>
-                  Learn More
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className={CARD}>
-              <h6 className={NUM}>02</h6>
-              <div className="work-img overflow-hidden rounded-t-[13px]">
-                <img src="/work2.webp" alt="work" className="w-full aspect-[9/5]" />
-              </div>
-              <div className={BODY}>
-                
-                <h3 className={`${TITLE} 2xl:leading-[20px]`}>
-                  Magnolia Smiles Website
-                </h3>
-                <p className={`${TEXT} mt-[10px] mb-[16px] md:mt-[8px] md:mb-[10px] lg:mt-[12px] lg:mb-[16px] xl:mt-[15px] xl:mb-[22px] 2xl:mt-[19px] 2xl:mb-[28px]`}>
-                  A conversion focused site built to book more patients.
-                </p>
-                <Link href={"#"} className={LINK}>
-                  Learn More
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className={CARD}>
-              <h6 className={NUM}>03</h6>
-              <div className="work-img overflow-hidden rounded-t-[13px]">
-                <img src="/work3.webp" alt="work" className="w-full aspect-[9/5]" />
-              </div>
-              <div className={BODY}>
-                
-                <h3 className={`${TITLE} 2xl:leading-[29px]`}>
-                  Addiction Recovery <br /> Website Redesign
-                </h3>
-                <p className={`${TEXT} mt-[5px] mb-[8px] md:mb-[6px] 2xl:mb-[9px]`}>
-                  High-converting landing page built to drive sales.
-                </p>
-                <Link href={"#"} className={LINK}>
-                  Learn More
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="work-btns group flex w-fit mx-auto items-center justify-center text-center mt-[28px] md:mt-[32px] 3xl:mt-[38px]">
             <Link
-              href="https://taibacreations.com/case-studies"
+              href={work.buttonLink}
               target="_blank"
               rel="noopener noreferrer"
               className="work-btn btn-roll inline-flex items-center justify-center text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[120px] md:w-[132px] h-[46px]"
             >
               <span className="roll">
-                <span data-text="See All">See All</span>
+                <span data-text={work.button}>{work.button}</span>
               </span>
             </Link>
             <Link
-              href="https://taibacreations.com/case-studies"
+              href={work.buttonLink}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="See all case studies"
+              aria-label={work.button}
               className="work-btn btn-arrow btn-arrow-dark relative inline-flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]"
             >
               <span className="arrow-swap">

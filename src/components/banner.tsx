@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Links from "./links";
 import Portfolio, { PORTFOLIO_COUNT } from "./portfolio";
 import ArrowIcon from "./arrow-icon";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -21,10 +22,16 @@ const PIN_OFFSET = 100;
 /* Pin par portfolio ka top screen ke top se kam az kam itna neeche rahe (px) */
 const PORTFOLIO_TOP_GAP = 20;
 
+/* Box ke icons: sab ki height barabar, width icon ki shakal se (1920 par 58px) */
+const BOX_ICON_HEIGHT =
+  "h-[34px] md:h-[30px] lg:h-[36px] xl:h-[44px] 2xl:h-[50px] 3xl:h-[58px]";
+
 const Banner = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const lenis = useLenis();
+  const { content, asset } = useIndustry();
+  const banner = content.banner;
 
   /* Swiper bante hi (resize par dobara bhi) instance lo aur pin positions dobara naapo */
   const handleSwiper = (swiper: SwiperType) => {
@@ -65,11 +72,17 @@ const Banner = () => {
           // 1) hero ka neecha kinara screen ke neeche se PIN_OFFSET upar
           // 2) portfolio ka top screen ke top se PORTFOLIO_TOP_GAP neeche (taake upar se na kate)
           start: () => {
-            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-            const portfolio = q(".anim-portfolio")[0] as HTMLElement | undefined;
+            const sectionTop =
+              section.getBoundingClientRect().top + window.scrollY;
+            const portfolio = q(".anim-portfolio")[0] as
+              | HTMLElement
+              | undefined;
 
             const bottomAlign =
-              sectionTop + section.offsetHeight - window.innerHeight + PIN_OFFSET;
+              sectionTop +
+              section.offsetHeight -
+              window.innerHeight +
+              PIN_OFFSET;
             const portfolioAlign = portfolio
               ? sectionTop + portfolio.offsetTop - PORTFOLIO_TOP_GAP
               : bottomAlign;
@@ -98,7 +111,8 @@ const Banner = () => {
             else {
               // bohot tez scroll par seedha sahi slide par
               const target =
-                (((swiper.realIndex + diff) % PORTFOLIO_COUNT) + PORTFOLIO_COUNT) %
+                (((swiper.realIndex + diff) % PORTFOLIO_COUNT) +
+                  PORTFOLIO_COUNT) %
                 PORTFOLIO_COUNT;
               swiper.slideToLoop(target);
             }
@@ -118,15 +132,25 @@ const Banner = () => {
         const bg = q(".anim-bg");
 
         /* ---------- Background: entrance zoom (layer hamesha thori bari rahegi) ---------- */
-        gsap.fromTo(bg, { scale: 1.2 }, { scale: 1.08, duration: 2.4, ease: "expo.out" });
+        gsap.fromTo(
+          bg,
+          { scale: 1.2 },
+          { scale: 1.08, duration: 2.4, ease: "expo.out" },
+        );
 
         /* ---------- Mouse parallax: H1 + background (entrance ke baad) ---------- */
         const startInteractions = () => {
           if (!window.matchMedia("(pointer: fine)").matches) return;
 
           const title = q(".anim-title");
-          const titleX = gsap.quickTo(title, "x", { duration: 1.4, ease: "power3" });
-          const titleY = gsap.quickTo(title, "y", { duration: 1.4, ease: "power3" });
+          const titleX = gsap.quickTo(title, "x", {
+            duration: 1.4,
+            ease: "power3",
+          });
+          const titleY = gsap.quickTo(title, "y", {
+            duration: 1.4,
+            ease: "power3",
+          });
           const bgX = gsap.quickTo(bg, "x", { duration: 2, ease: "power3" });
           const bgY = gsap.quickTo(bg, "y", { duration: 2, ease: "power3" });
 
@@ -167,10 +191,20 @@ const Banner = () => {
           },
         });
 
-        tl.from(q(".anim-blur"), { y: 160, autoAlpha: 0, duration: 1.8, ease: "expo.out" }, 0)
+        tl.from(
+          q(".anim-blur"),
+          { y: 160, autoAlpha: 0, duration: 1.8, ease: "expo.out" },
+          0,
+        )
           .from(
             q(".anim-logo"),
-            { y: -40, scale: 0.9, autoAlpha: 0, filter: "blur(12px)", duration: 1.2 },
+            {
+              y: -40,
+              scale: 0.9,
+              autoAlpha: 0,
+              filter: "blur(12px)",
+              duration: 1.2,
+            },
             0.1,
           )
           .from(
@@ -192,21 +226,48 @@ const Banner = () => {
           )
           .from(
             q(".anim-btn"),
-            { y: 30, scale: 0.9, autoAlpha: 0, stagger: 0.12, ease: "back.out(1.7)" },
+            {
+              y: 30,
+              scale: 0.9,
+              autoAlpha: 0,
+              stagger: 0.12,
+              ease: "back.out(1.7)",
+            },
             0.85,
           )
-          .from(q(".anim-links"), { x: 80, autoAlpha: 0, duration: 1.2, ease: "expo.out" }, 0.7)
+          .from(
+            q(".anim-links"),
+            { x: 80, autoAlpha: 0, duration: 1.2, ease: "expo.out" },
+            0.7,
+          )
           .from(
             q(".anim-portfolio .swiper"),
-            { y: 160, scale: 0.92, autoAlpha: 0, filter: "blur(10px)", duration: 1.6, ease: "expo.out" },
+            {
+              y: 160,
+              scale: 0.92,
+              autoAlpha: 0,
+              filter: "blur(10px)",
+              duration: 1.6,
+              ease: "expo.out",
+            },
             0.6,
           )
           .from(
             q(".anim-portfolio .portfolio-arrow"),
-            { scale: 0.4, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: "back.out(2.2)" },
+            {
+              scale: 0.4,
+              autoAlpha: 0,
+              duration: 0.9,
+              stagger: 0.1,
+              ease: "back.out(2.2)",
+            },
             1.3,
           )
-          .from(q(".anim-box"), { y: 80, autoAlpha: 0, duration: 1.3, ease: "expo.out" }, 1)
+          .from(
+            q(".anim-box"),
+            { y: 80, autoAlpha: 0, duration: 1.3, ease: "expo.out" },
+            1,
+          )
           .from(
             q(".anim-box-item"),
             { y: 24, autoAlpha: 0, filter: "blur(6px)", stagger: 0.12 },
@@ -218,18 +279,43 @@ const Banner = () => {
             1.35,
           );
 
+        /* Subtitle (sirf jis page par ho): logo ke baad */
+        if (q(".anim-subtitle").length) {
+          tl.from(
+            q(".anim-subtitle"),
+            {
+              y: 24,
+              autoAlpha: 0,
+              filter: "blur(6px)",
+              duration: 1,
+              ease: "expo.out",
+            },
+            0.15,
+          );
+        }
+
         /* ---------- Scroll parallax ---------- */
         gsap.to(q(".anim-hero-head"), {
           y: -90,
           autoAlpha: 0.15,
           ease: "none",
-          scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: true },
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
         });
 
         gsap.to(bg, {
           yPercent: 6,
           ease: "none",
-          scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: true },
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
         });
 
         return () => cleanups.forEach((fn) => fn());
@@ -247,12 +333,16 @@ const Banner = () => {
     >
       {/* Background layer (mouse + scroll parallax) */}
       <div
-        className="anim-bg absolute -z-10 bg-[url(/banner.webp)] bg-cover bg-center bg-no-repeat will-change-transform"
-        style={{ inset: -40, transform: "scale(1.08)" }}
+        className="anim-bg absolute -z-10 bg-cover bg-center bg-no-repeat will-change-transform"
+        style={{
+          inset: 0,
+          transform: "scale(1.08)",
+          backgroundImage: `url(${asset("banner.webp")})`,
+        }}
       />
 
       <img
-        src="/banner-blur.webp"
+        src={asset("banner-blur.webp")}
         alt="blur"
         className="anim-blur absolute w-full z-10 h-[220px] bottom-[-10%] md:bottom-[-20%] md:h-[300px] lg:h-[400px]"
       />
@@ -278,42 +368,23 @@ const Banner = () => {
   "
       >
         <div className="flex items-center h-full">
-          <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
-            <img
-              src="/icon1.webp"
-              alt="icon"
-              className="h-auto w-[34px] md:w-[30px] lg:w-[36px] xl:w-[44px] 2xl:w-[50px] 3xl:w-[58px]"
-            />
-            <h4 className="font-calsans capitalize text-black text-[13px] md:text-[13px] lg:text-[15px] xl:text-[18px] 2xl:text-[21px] 3xl:text-[24px]">
-              100% SEO-Ready
-            </h4>
-          </div>
-
-          <span className="gradient-border h-[50px] md:h-[50px] lg:h-[60px] xl:h-[70px] 2xl:h-[80px] 3xl:h-[90px]" />
-
-          <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
-            <img
-              src="/icon2.webp"
-              alt="icon"
-              className="h-auto w-[64px] md:w-[56px] lg:w-[68px] xl:w-[82px] 2xl:w-[94px] 3xl:w-[109px]"
-            />
-            <h4 className="font-calsans capitalize text-black text-[13px] md:text-[13px] lg:text-[15px] xl:text-[18px] 2xl:text-[21px] 3xl:text-[24px]">
-              HIPAA-Aware Design
-            </h4>
-          </div>
-
-          <span className="gradient-border h-[50px] md:h-[50px] lg:h-[60px] xl:h-[70px] 2xl:h-[80px] 3xl:h-[90px]" />
-
-          <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
-            <img
-              src="/icon3.webp"
-              alt="icon"
-              className="h-auto w-[34px] md:w-[30px] lg:w-[36px] xl:w-[44px] 2xl:w-[50px] 3xl:w-[58px]"
-            />
-            <h4 className="font-calsans capitalize text-black text-[13px] md:text-[13px] lg:text-[15px] xl:text-[18px] 2xl:text-[21px] 3xl:text-[24px]">
-              Built for Local Search
-            </h4>
-          </div>
+          {banner.boxItems.map((item, i) => (
+            <div key={item.label} className="contents">
+              {i > 0 && (
+                <span className="gradient-border h-[50px] md:h-[50px] lg:h-[60px] xl:h-[70px] 2xl:h-[80px] 3xl:h-[90px]" />
+              )}
+              <div className="anim-box-item box-item flex-1 flex flex-col justify-center items-center gap-2 lg:gap-3 px-1 text-center">
+                <img
+                  src={asset(item.icon)}
+                  alt=""
+                  className={`w-auto max-w-[80%] object-contain ${BOX_ICON_HEIGHT}`}
+                />
+                <h4 className="font-calsans capitalize text-hero-box-text text-[13px] md:text-[13px] lg:text-[15px] xl:text-[18px] 2xl:text-[21px] 3xl:text-[24px]">
+                  {item.label}
+                </h4>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -325,37 +396,58 @@ const Banner = () => {
       {/* Mobile par "contents" taake heading aur text flex order follow karein */}
       <div className="contents md:block">
         <div className="anim-hero-head order-1 text-center flex flex-col justify-center items-center mx-auto px-5 pt-10 max-w-[650px] md:px-0 md:pt-[50px] md:max-w-[440px] lg:pt-[50px] lg:max-w-[560px] xl:pt-[52px] xl:max-w-[680px] 2xl:pt-[56px] 2xl:max-w-[800px] 3xl:pt-[61px] 3xl:max-w-[948px]">
-          <img src="/logo.svg" alt="logo" className="anim-logo max-w-[180px] lg:max-w-none" />
-          <h1 className="anim-title text-white tracking-[-0.03em] mt-5 text-[36px] leading-[40px] md:mt-[20px] md:text-[32px] md:leading-[34px] lg:mt-[37px] lg:text-[44px] lg:leading-[44px] xl:mt-[38px] xl:text-[54px] xl:leading-[54px] 2xl:mt-[41px] 2xl:text-[64px] 2xl:leading-[63px] 3xl:mt-[45px] 3xl:text-[76px] 3xl:leading-[75px]">
-            Healthcare Websites{" "}
-            <span className="italic font-playfair font-light">That Will</span>{" "}
-            Help You To Win Patient Trust
+          <img
+            src={asset("logo.svg")}
+            alt="TAIBA Creations"
+            className="anim-logo max-w-[180px] lg:max-w-none"
+          />
+
+          {/* Subtitle: sirf jis page ke content mein ho (jaise peptides) */}
+          {banner.subtitle && (
+            <p className="anim-subtitle font-normal text-hero-title tracking-[-0.02em] mt-5 text-[18px] leading-[24px] md:mt-[20px] md:text-[16px] md:leading-[20px] lg:mt-[30px] lg:text-[22px] lg:leading-[26px] xl:mt-[32px] xl:text-[26px] xl:leading-[30px] 2xl:mt-[34px] 2xl:text-[32px] 2xl:leading-[36px] 3xl:mt-[38px] 3xl:text-[38px] 3xl:leading-[42px]">
+              {banner.subtitle}
+            </p>
+          )}
+
+          <h1
+            className={`anim-title text-hero-title tracking-[-0.03em] text-[36px] leading-[40px] md:text-[32px] md:leading-[34px] lg:text-[44px] lg:leading-[44px] xl:text-[54px] xl:leading-[54px] 2xl:text-[64px] 2xl:leading-[63px] 3xl:text-[76px] 3xl:leading-[75px] ${
+              banner.subtitle
+                ? "mt-2 lg:mt-3"
+                : "mt-5 md:mt-[20px] lg:mt-[37px] xl:mt-[38px] 2xl:mt-[41px] 3xl:mt-[45px]"
+            }`}
+          >
+            {banner.titleStart}
+            {banner.titleItalic && (
+              <>
+                {" "}
+                <span className="italic font-playfair font-light">
+                  {banner.titleItalic}
+                </span>
+              </>
+            )}
+            {banner.titleEnd && <> {banner.titleEnd}</>}
           </h1>
         </div>
 
-        <div className="order-2 relative w-full mx-auto px-5 mt-5 text-center text-white z-10 max-w-[480px] md:absolute md:mx-0 md:px-0 md:mt-0 md:text-left md:left-[3%] md:top-[200px] md:max-w-[200px] lg:top-[27%] lg:max-w-[260px] xl:top-[30%] xl:max-w-[290px] 2xl:max-w-[350px] 3xl:left-[8.5%] 3xl:top-[32.5%] 3xl:max-w-[443px]">
+        <div className="order-2 relative w-full mx-auto px-5 mt-5 text-center text-hero-text z-10 max-w-[480px] md:absolute md:mx-0 md:px-0 md:mt-0 md:text-left md:left-[3%] md:top-[200px] md:max-w-[200px] lg:top-[27%] lg:max-w-[260px] xl:top-[30%] xl:max-w-[290px] 2xl:max-w-[350px] 3xl:left-[8.5%] 3xl:top-[32.5%] 3xl:max-w-[443px]">
           <p className="anim-text font-medium text-[16px] leading-[24px] md:text-[12px] md:leading-[17px] lg:text-[15px] lg:leading-[22px] xl:text-[17px] xl:leading-[25px] 2xl:text-[19px] 2xl:leading-[27px] 3xl:text-[22px] 3xl:leading-[31px]">
-            Patients search on Google and AI models before visiting a clinic.
-            They check your website, content, reviews, mobile experience, and
-            local business profile before booking.
+            {banner.text}
           </p>
           <div className="group inline-flex items-center mt-5 md:mt-3 lg:mt-[15px] xl:mt-[16px] 2xl:mt-[17px] 3xl:mt-[19px]">
             <button
               type="button"
               onClick={goToContact}
-              className="anim-btn btn-roll leading-[31px] text-[#438AD8] bg-white rounded-full h-[46px] text-[15px] w-[250px] md:h-[36px] md:text-[11px] md:w-[170px] lg:h-[46px] lg:text-[13px] lg:w-[230px] xl:text-[15px] xl:w-[265px] 2xl:text-[17px] 2xl:w-[300px] 3xl:text-[18px] 3xl:w-[321px]"
+              className="anim-btn btn-roll btn-cta leading-[31px] bg-cta-bg text-cta-text rounded-full h-[46px] text-[15px] w-[250px] md:h-[36px] md:text-[11px] md:w-[170px] lg:h-[46px] lg:text-[13px] lg:w-[230px] xl:text-[15px] xl:w-[265px] 2xl:text-[17px] 2xl:w-[300px] 3xl:text-[18px] 3xl:w-[321px]"
             >
               <span className="roll">
-                <span data-text="Get a Free Website Consultation">
-                  Get a Free Website Consultation
-                </span>
+                <span data-text={banner.cta}>{banner.cta}</span>
               </span>
             </button>
             <button
               type="button"
               onClick={goToContact}
               aria-label="Go to contact form"
-              className="anim-btn btn-arrow arrow relative flex justify-center items-center rounded-full w-[46px] h-[46px] md:w-[36px] md:h-[36px] lg:w-[46px] lg:h-[46px] shrink-0"
+              className="anim-btn btn-arrow arrow btn-cta-arrow relative flex justify-center items-center rounded-full w-[46px] h-[46px] md:w-[36px] md:h-[36px] lg:w-[46px] lg:h-[46px] shrink-0"
             >
               <span className="arrow-swap">
                 <ArrowIcon />

@@ -5,8 +5,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import ArrowIcon from "./arrow-icon";
 import Link from "next/link";
+import ArrowIcon from "./arrow-icon";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -14,6 +15,8 @@ const Supporting = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const { content, asset } = useIndustry();
+  const supporting = content.supporting;
 
   const handlePlay = () => {
     videoRef.current?.play();
@@ -197,6 +200,8 @@ const Supporting = () => {
     { scope: sectionRef },
   );
 
+  const companiesImg = asset("companies.webp");
+
   return (
     <section
       ref={sectionRef}
@@ -207,8 +212,8 @@ const Supporting = () => {
           <div className="sup-companies-wrap flex justify-center items-center px-4 md:px-6 md:-mt-[14px]">
             <div className="sup-companies-tilt relative w-full max-w-[1185px] will-change-transform">
               <img
-                src="/companies.webp"
-                alt="companies"
+                src={companiesImg}
+                alt="Our clients"
                 className="sup-companies block w-full h-auto"
               />
               {/* Glare: sirf coins par (image hi mask hai) */}
@@ -222,8 +227,8 @@ const Supporting = () => {
                     background:
                       "radial-gradient(circle at calc(var(--gx) * 1%) calc(var(--gy) * 1%), rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 35%)",
                     mixBlendMode: "soft-light",
-                    WebkitMaskImage: "url(/companies.webp)",
-                    maskImage: "url(/companies.webp)",
+                    WebkitMaskImage: `url(${companiesImg})`,
+                    maskImage: `url(${companiesImg})`,
                     WebkitMaskSize: "100% 100%",
                     maskSize: "100% 100%",
                   } as React.CSSProperties
@@ -234,35 +239,34 @@ const Supporting = () => {
 
           <div className="text-center max-w-[500px] 3xl:max-w-[690px] mx-auto px-5 md:px-0 relative -mt-3 md:mt-[-9%] lg:mt-[-10%] xl:mt-[-9.6%] 2xl:mt-[-8%] 3xl:mt-[-6.4%]">
             <h4 className="sup-subtitle text-black text-[18px] md:text-[20px] lg:text-[22px] 2xl:text-[24px]">
-              Our Healthcare Clients
+              {supporting.eyebrow}
             </h4>
             <h2 className="sup-title tracking-[-3%] text-black mt-[5px] text-[32px] leading-[36px] md:text-[38px] md:leading-[42px] lg:text-[42px] lg:leading-[46px] xl:text-[48px] xl:leading-[52px] 2xl:text-[54px] 2xl:leading-[58px] 3xl:text-[60px] 3xl:leading-[64px]">
-              Supporting Healthcare Businesses{" "}
+              {supporting.titleStart}{" "}
               <span className="font-playfair tracking-[-9%] italic font-light">
-                Worldwide
+                {supporting.titleItalic}
               </span>
             </h2>
             <p className="sup-text font-medium text-black max-w-[623px] mx-auto mt-[9px] text-[15px] leading-[22px] md:text-[16px] md:leading-[23px] xl:text-[18px] xl:leading-[25px]">
-              At TAIBA Creations, we build healthcare websites around your
-              patients to build trust and encourage more appointments.
+              {supporting.text}
             </p>
 
             <div className="group inline-flex items-center justify-center mt-[20px] md:mt-[28px]">
               <Link
-                href="https://taibacreations.com/portfolio/"
+                href={supporting.buttonLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="sup-btn btn-roll inline-flex items-center justify-center text-[16px] md:text-[18px] leading-[31px] text-white tracking-[1%] bg-[#2D2D2D] rounded-full w-[170px] md:w-[187px] h-[46px]"
               >
                 <span className="roll">
-                  <span data-text="Explore Our Work">Explore Our Work</span>
+                  <span data-text={supporting.button}>{supporting.button}</span>
                 </span>
               </Link>
               <Link
-                href="https://taibacreations.com/portfolio/"
+                href={supporting.buttonLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Explore our work"
+                aria-label={supporting.button}
                 className="sup-btn btn-arrow btn-arrow-dark relative flex justify-center items-center rounded-full w-[46px] h-[46px] shrink-0 bg-[#2D2D2D]"
               >
                 <span className="arrow-swap">
@@ -277,8 +281,8 @@ const Supporting = () => {
           <div className="sup-video video-wrap relative mx-auto overflow-hidden w-[calc(100%-32px)] md:w-[calc(100%-48px)] xl:w-[calc(100%-80px)] max-w-[1440px] aspect-[16/11] md:aspect-[1440/604] rounded-[16px] md:rounded-[30px] mt-[40px] md:mt-[64px] lg:mt-[80px] xl:mt-[90px] 2xl:mt-[100px] 3xl:mt-[120px]">
             <video
               ref={videoRef}
-              src="/supporting-video.mp4"
-              poster="/poster.webp"
+              src={asset("supporting-video.mp4")}
+              poster={asset("poster.webp")}
               preload="metadata"
               playsInline
               controls={playing}

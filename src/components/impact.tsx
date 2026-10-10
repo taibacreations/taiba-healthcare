@@ -5,18 +5,14 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
-const stats = [
-  { value: 148, suffix: "+", label: "Healthcare Clients" },
-  { value: 94, suffix: "%", label: "Client Retention" },
-  { value: 58, suffix: "%", label: "More Bookings" },
-  { value: 35, suffix: "+", label: "Countries Served" },
-];
-
 const Impact = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { content } = useIndustry();
+  const impact = content.impact;
 
   useGSAP(
     () => {
@@ -127,23 +123,22 @@ const Impact = () => {
         {/* Header */}
         <div className="imp-head text-center max-w-[760px] mx-auto">
           <h4 className="imp-subtitle uppercase text-black text-[16px] md:text-[18px] lg:text-[20px] 2xl:text-[22px]">
-            Our Impact
+            {impact.eyebrow}
           </h4>
           <h2 className="imp-title uppercase tracking-[-3%] text-black mt-[5px] text-[32px] leading-[36px] md:text-[38px] md:leading-[42px] lg:text-[42px] lg:leading-[46px] xl:text-[48px] xl:leading-[52px] 2xl:text-[54px] 2xl:leading-[58px] 3xl:text-[60px] 3xl:leading-[64px]">
-            Real Results. Real{" "}
+            {impact.titleStart}{" "}
             <span className="normal-case font-playfair tracking-[-9%] italic font-light">
-              Growth.
+              {impact.titleItalic}
             </span>
           </h2>
           <p className="imp-text font-medium text-black max-w-[720px] mx-auto mt-[9px] text-[15px] leading-[22px] md:text-[16px] md:leading-[23px] xl:text-[18px] xl:leading-[25px]">
-            Every project is built to do more than look good. It&apos;s built to
-            bring in calls, bookings, and new patients.
+            {impact.text}
           </p>
         </div>
 
         {/* Stats */}
         <div className="imp-stats grid grid-cols-2 md:grid-cols-4 mt-[28px] md:mt-[24px] xl:mt-[28px]">
-          {stats.map((s, i) => (
+          {impact.stats.map((s, i) => (
             <div
               key={s.label}
               className={`imp-stat relative flex flex-col items-center justify-center text-center py-6 md:py-[22px] lg:py-[26px] 2xl:py-[30px]
