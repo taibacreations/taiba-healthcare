@@ -15,7 +15,7 @@ import { useIndustry } from "@/lib/industry";
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 /* Har slide ke liye kitna scroll (px). Kam = tez slides, zyada = aahista */
-const SCROLL_PER_SLIDE = 250;
+const SCROLL_PER_SLIDE = 1500;
 
 /* Pin kitna upar lage (px). Zyada = aur upar, kam = neeche */
 const PIN_OFFSET = 100;

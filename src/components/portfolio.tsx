@@ -36,6 +36,10 @@ const BASE = {
 const ROTATE_DEG = 15;
 const SPACE_BETWEEN = 0;
 
+/* Slide badalne ki raftaar (ms). Zyada = aur narm/aahista */
+const SPEED = 1000;
+const EASE = "cubic-bezier(0.65, 0, 0.35, 1)"; // shuru aur aakhir dono narm
+
 /* Har breakpoint ka scale factor */
 const getScale = (w: number) => {
   if (w >= 1800) return 1; // 3xl
@@ -84,8 +88,9 @@ const Portfolio = ({ onSwiper }: Props) => {
           slidesPerView="auto"
           centeredSlides
           loop
-          speed={700}
+          speed={SPEED}
           spaceBetween={SPACE_BETWEEN}
+          allowTouchMove={false} // drag/swipe band: slides sirf scroll aur arrows se
           onSwiper={onSwiper}
           navigation={{
             prevEl: ".portfolio-prev",
@@ -104,7 +109,8 @@ const Portfolio = ({ onSwiper }: Props) => {
                   <img
                     src={asset(file)}
                     alt="portfolio"
-                    className="absolute object-contain cursor-grab"
+                    draggable={false}
+                    className="absolute object-contain select-none"
                     style={{
                       width: isActive ? ACTIVE_WIDTH : INACTIVE_WIDTH,
                       height: isActive ? ACTIVE_HEIGHT : INACTIVE_HEIGHT,
@@ -126,8 +132,7 @@ const Portfolio = ({ onSwiper }: Props) => {
                           : isNext
                             ? `rotate(${ROTATE_DEG}deg)`
                             : "rotate(0deg)",
-                      transition:
-                        "width 700ms cubic-bezier(0.4, 0, 0.2, 1), height 700ms cubic-bezier(0.4, 0, 0.2, 1), top 700ms cubic-bezier(0.4, 0, 0.2, 1), transform 700ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms ease",
+                      transition: `width ${SPEED}ms ${EASE}, height ${SPEED}ms ${EASE}, top ${SPEED}ms ${EASE}, transform ${SPEED}ms ${EASE}, opacity 400ms ease`,
                       willChange: "transform, opacity",
                     }}
                   />
