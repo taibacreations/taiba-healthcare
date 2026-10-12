@@ -8,14 +8,14 @@ import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Links from "./links";
-import Portfolio, { PORTFOLIO_COUNT } from "./portfolio";
+import Portfolio from "./portfolio";
 import ArrowIcon from "./arrow-icon";
 import { useIndustry } from "@/lib/industry";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 /* Har slide ke liye kitna scroll (px). Kam = tez slides, zyada = aahista */
-const SCROLL_PER_SLIDE = 1500;
+const SCROLL_PER_SLIDE = 2000;
 
 /* Pin kitna upar lage (px). Zyada = aur upar, kam = neeche */
 const PIN_OFFSET = 100;
@@ -62,9 +62,8 @@ const Banner = () => {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        /* ---------- Scroll se slides: hero ka neecha hissa screen par aate hi pin ---------- */
-        const steps = PORTFOLIO_COUNT - 1;
-        let lastStep = 0;
+                /* ---------- Scroll par sirf ek slide: pin ke beech mein ek dafa slideNext ---------- */
+        let moved = false;
 
         ScrollTrigger.create({
           trigger: section,
@@ -90,7 +89,7 @@ const Banner = () => {
             // hero screen se chhota ho to shuru se hi (section ka top)
             return Math.max(sectionTop, Math.min(bottomAlign, portfolioAlign));
           },
-          end: () => `+=${steps * SCROLL_PER_SLIDE}`,
+          end: () => `+=${SCROLL_PER_SLIDE}`, // sirf ek slide jitna pin
           pin: section,
           pinSpacing: true,
           anticipatePin: 1,
@@ -100,21 +99,15 @@ const Banner = () => {
             const swiper = swiperRef.current;
             if (!swiper) return;
 
-            const step = Math.round(self.progress * steps);
-            const diff = step - lastStep;
-            if (!diff) return;
-            lastStep = step;
-
-            // ek qadam aage/peeche, taake arrows/drag se badli hui slide se hi aage chale
-            if (diff === 1) swiper.slideNext();
-            else if (diff === -1) swiper.slidePrev();
-            else {
-              // bohot tez scroll par seedha sahi slide par
-              const target =
-                (((swiper.realIndex + diff) % PORTFOLIO_COUNT) +
-                  PORTFOLIO_COUNT) %
-                PORTFOLIO_COUNT;
-              swiper.slideToLoop(target);
+            // Neeche: aadha paar karte hi ek slide aage
+            if (self.progress >= 0.5 && !moved) {
+              moved = true;
+              swiper.slideNext();
+            }
+            // Upar wapas: aadhe se peeche aate hi ek slide peeche
+            else if (self.progress < 0.5 && moved) {
+              moved = false;
+              swiper.slidePrev();
             }
           },
         });

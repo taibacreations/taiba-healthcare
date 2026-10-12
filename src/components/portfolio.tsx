@@ -10,14 +10,14 @@ import { useIndustry } from "@/lib/industry";
 
 /* File names: har industry folder mein yahi names (public/[industry]/...) */
 const portfolioImages = [
-  "portfolio3.webp",
   "portfolio1.webp",
+  "portfolio3.webp",
   "portfolio2.webp",
-  "portfolio3.webp",
   "portfolio1.webp",
+  "portfolio3.webp",
   "portfolio2.webp",
-  "portfolio3.webp",
   "portfolio1.webp",
+  "portfolio3.webp",
   "portfolio2.webp",
 ];
 
