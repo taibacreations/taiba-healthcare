@@ -166,7 +166,7 @@ const Experience = () => {
       ref={sectionRef}
       className="overflow-hidden py-[24px] md:py-[16px] lg:py-[22px] xl:py-[28px] 2xl:py-[34px] 3xl:py-[42px]"
     >
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row 2xl:mt-[6vh]">
         {/* Left visual */}
         <div className="relative w-full">
           <div

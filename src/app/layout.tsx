@@ -4,9 +4,9 @@ import {
   Geist,
   Geist_Mono,
   Outfit,
-  Playfair,
 } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 import SmoothScroll from "@/components/smooth-scroll";
 
 const geistSans = Geist({
@@ -23,10 +23,12 @@ const calSans = Cal_Sans({
   subsets: ["latin"],
   weight: ["400"],
 });
-const playFair = Playfair({
+const playFair = localFont({
+  src: "../fonts/playfair/Playfair_144pt-LightItalic.ttf",
   variable: "--font-play-fair",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  style: "italic",
+  weight: "300",
 });
 const outfit = Outfit({
   variable: "--font-outfit",
