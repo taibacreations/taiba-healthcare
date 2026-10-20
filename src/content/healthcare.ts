@@ -82,20 +82,20 @@ export const healthcare: IndustryContent = {
     logos: "logos.webp",
   },
 
-    impact: {
+  impact: {
     eyebrow: "Our Impact",
     titleStart: "Real Results. Real",
     titleItalic: "Growth.",
     text: "Every project is built to do more than look good. It's built to bring in calls, bookings, and new patients.",
     stats: [
-      { value: 148, suffix: "+", label: "Healthcare Clients" },
-      { value: 94, suffix: "%", label: "Client Retention" },
-      { value: 58, suffix: "%", label: "More Bookings" },
-      { value: 35, suffix: "+", label: "Countries Served" },
+      { value: 50, suffix: "+", label: "Brands Served" },
+      { value: 14, suffix: "", label: "States Reached" },
+      { value: 100, suffix: "%", label: "Done-For-You" },
+      { value: 5, suffix: "+", label: "Years in Business" },
     ],
   },
 
-    work: {
+  work: {
     titleStart: "Our Work,",
     titleItalic: "Your Inspiration",
     text: "Explore how we turn ideas into thoughtful, impactful digital experiences designed to solve real challenges.",
@@ -123,7 +123,7 @@ export const healthcare: IndustryContent = {
     buttonLink: "https://taibacreations.com/case-studies",
   },
 
-    process: {
+  process: {
     titleStart: "Thoughtful Process Behind Every Healthcare",
     titleItalic: "Website",
     text: "A clear 5-step process designed to launch your healthcare website on time",
@@ -151,7 +151,7 @@ export const healthcare: IndustryContent = {
     ],
   },
 
-    tools: {
+  tools: {
     titleStart: "Tools & Technologies",
     titleItalic: "We Build With",
     outer: [
@@ -175,7 +175,7 @@ export const healthcare: IndustryContent = {
     ],
   },
 
-    trusted: {
+  trusted: {
     titleStart: "Trusted by Growing",
     titleItalic: "Healthcare Practices",
     items: [
@@ -188,7 +188,7 @@ export const healthcare: IndustryContent = {
     ],
   },
 
-    team: {
+  team: {
     titleStart: "Our",
     titleItalic: "Team",
     text: "45+ specialists across design, engineering, AI, and growth marketing dedicated to turning ideas into results.",
@@ -203,7 +203,7 @@ export const healthcare: IndustryContent = {
     buttonLink: "https://taibacreations.com/team/",
   },
 
-    awards: {
+  awards: {
     titleStart: "Awards &",
     titleItalic: "Recognition",
     text: "Recognized for excellence and consistent results",
@@ -211,12 +211,20 @@ export const healthcare: IndustryContent = {
       { logo: "fiverr.webp", size: "55.2%", title: "Fiverr\nMillionaire" },
       { logo: "cpc.webp", size: "66.4%", title: "Top Rated\nSeller-CPC Pak" },
       { logo: "verified.webp", size: "51.2%", title: "Vetted Pro\nOn Fiverr" },
-      { logo: "toprated.webp", size: "67.2%", title: "Fiverr Top\nRated Agency" },
-      { logo: "extraordinary.webp", size: "48%", title: "Extraordinary\nFreelancer" },
+      {
+        logo: "toprated.webp",
+        size: "67.2%",
+        title: "Fiverr Top\nRated Agency",
+      },
+      {
+        logo: "extraordinary.webp",
+        size: "48%",
+        title: "Extraordinary\nFreelancer",
+      },
     ],
   },
 
-    faq: {
+  faq: {
     titleStart: "Frequently Asked",
     titleItalic: "Questions",
     text: "Everything research teams usually ask before placing an order with us.",
@@ -248,7 +256,7 @@ export const healthcare: IndustryContent = {
     ],
   },
 
-    contact: {
+  contact: {
     titleStart: "Your Next Patient Is Searching for",
     titleItalic: "You Right Now.",
     text: "Make Sure Patients Find Your Clinic Before They Find Your Competitors",

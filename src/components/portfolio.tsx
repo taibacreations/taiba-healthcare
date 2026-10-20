@@ -1,3 +1,4 @@
+// src/components/portfolio.tsx — REPLACE existing file
 "use client";
 
 import { useLayoutEffect, useState } from "react";
@@ -35,6 +36,12 @@ const BASE = {
 };
 const ROTATE_DEG = 15;
 const SPACE_BETWEEN = 0;
+
+/* Active slide ki white border aur kone: 2xl+ par poore, chhoti screens par usi ratio se kam */
+const ACTIVE_BORDER = 12;
+const ACTIVE_RADIUS = 40;
+const fit = (value: number, scale: number, min: number) =>
+  scale >= 0.8 ? value : Math.max(min, Math.round((value * scale) / 0.8));
 
 /* Slide badalne ki raftaar (ms). Zyada = aur narm/aahista */
 const SPEED = 1000;
@@ -74,6 +81,8 @@ const Portfolio = ({ onSwiper }: Props) => {
   const INACTIVE_TOP = Math.round(BASE.inactiveTop * scale);
   const SLIDE_HEIGHT = Math.round((BASE.activeH + BASE.extraH) * scale);
   const TRACK_WIDTH = ACTIVE_WIDTH * 3 + SPACE_BETWEEN * 2;
+  const BORDER = fit(ACTIVE_BORDER, scale, 4);
+  const RADIUS = fit(ACTIVE_RADIUS, scale, 12);
 
   return (
     <section className="flex justify-center relative">
@@ -110,7 +119,7 @@ const Portfolio = ({ onSwiper }: Props) => {
                     src={asset(file)}
                     alt="portfolio"
                     draggable={false}
-                    className="absolute object-contain select-none"
+                    className="absolute object-cover object-top select-none"
                     style={{
                       width: isActive ? ACTIVE_WIDTH : INACTIVE_WIDTH,
                       height: isActive ? ACTIVE_HEIGHT : INACTIVE_HEIGHT,
@@ -120,6 +129,9 @@ const Portfolio = ({ onSwiper }: Props) => {
                       zIndex: isActive ? 10 : 0,
                       opacity: visible ? 1 : 0,
                       pointerEvents: visible ? "auto" : "none",
+                      boxSizing: "border-box",
+                      border: `${isActive ? BORDER : 0}px solid #ffffff`,
+                      borderRadius: RADIUS,
                       transformOrigin: isPrev
                         ? "right top"
                         : isNext
@@ -132,7 +144,7 @@ const Portfolio = ({ onSwiper }: Props) => {
                           : isNext
                             ? `rotate(${ROTATE_DEG}deg)`
                             : "rotate(0deg)",
-                      transition: `width ${SPEED}ms ${EASE}, height ${SPEED}ms ${EASE}, top ${SPEED}ms ${EASE}, transform ${SPEED}ms ${EASE}, opacity 400ms ease`,
+                      transition: `width ${SPEED}ms ${EASE}, height ${SPEED}ms ${EASE}, top ${SPEED}ms ${EASE}, transform ${SPEED}ms ${EASE}, border-width ${SPEED}ms ${EASE}, border-radius ${SPEED}ms ${EASE}, opacity 400ms ease`,
                       willChange: "transform, opacity",
                     }}
                   />

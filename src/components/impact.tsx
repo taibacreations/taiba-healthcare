@@ -117,7 +117,7 @@ const Impact = () => {
   return (
     <section
       ref={sectionRef}
-      className="pt-[48px] md:pt-[56px] lg:py-[64px] xl:py-[80px] 2xl:py-[96px] 3xl:py-[100px]"
+      className="pt-[48px] md:pt-[56px] lg:py-[64px] xl:py-[80px] 2xl:py-[96px] 3xl:pb-[30px] 3xl:pt-[130px]"
     >
       <div className="max-w-[1620px] mx-auto xl:px-10 md:px-6 px-4">
         {/* Header */}
@@ -154,7 +154,7 @@ const Impact = () => {
                 {s.value}
                 {s.suffix}
               </span>
-              <span className="imp-label font-medium text-black mt-3 lg:mt-4 text-[15px] md:text-[16px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px]">
+              <span className="imp-label font-medium text-black mt-3 lg:mt-4 text-[15px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px]">
                 {s.label}
               </span>
             </div>
